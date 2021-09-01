@@ -6,6 +6,7 @@
         YellowFish,
         RedFish,
         BlueFish,
+        GreenFish,
         Trigger,
     }
 }

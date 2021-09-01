@@ -152,11 +152,11 @@ namespace LittleSubmarine2
                     Debug.Log("Wall hit right");
                     //DO NOTHING
                 }
-                else if (Physics2D.OverlapCircle(
-                    movePoint.position + new Vector3(1f, 0f), .2f, WhatCanBePushed))
+                else if (Physics2D.OverlapCircle(movePoint.position + new Vector3(1f, 0f), .2f, WhatCanBePushed))
                 {
+                    Debug.Log("Pushing Object");
                     GameObject pushedObject = Physics2D.OverlapCircle(movePoint.position + new Vector3(rawAxis.x, 0f), .2f, WhatCanBePushed).gameObject;
-
+                    Debug.Log("Pushable Object Identified: " + pushedObject);
                     PushBlock(pushedObject, Vector2.right);
                 }
                 else
@@ -254,7 +254,7 @@ namespace LittleSubmarine2
 
         private void PushBlock(GameObject blockToPush, Vector2 direction)
         {
-            if (blockToPush.GetComponent<MovingBlock>().Push(direction, moveSpeed))
+            if (blockToPush.GetComponent<IPushable>().Push(direction, moveSpeed))
             {
                 if (direction == Vector2.down)
                 {
@@ -313,32 +313,32 @@ namespace LittleSubmarine2
                 
                 case MoveTypes.PUSHUP:
                 {
-                    Move(MoveDirections.Down, true, false);
                     GameObject pushedObject = Physics2D.OverlapCircle(movePoint.position + new Vector3(0f, 1f), .2f, WhatCanBePushed).gameObject;
+                    Move(MoveDirections.Down, true, false);
                     IPushable pushable = pushedObject.GetComponent<IPushable>();
                     pushable.UndoPush();
                     break;
                 }
                 case MoveTypes.PUSHDOWN:
                 {
-                    Move(MoveDirections.Up, true, false);
                     GameObject pushedObject = Physics2D.OverlapCircle(movePoint.position + new Vector3(0f, -1f), .2f, WhatCanBePushed).gameObject;
+                    Move(MoveDirections.Up, true, false);
                     IPushable pushable = pushedObject.GetComponent<IPushable>();
                     pushable.UndoPush();
                     break;
                 }
                 case MoveTypes.PUSHLEFT:
                 {
+                    GameObject pushedObject = Physics2D.OverlapCircle(movePoint.position + new Vector3(-1f, 0f), .2f, WhatCanBePushed).gameObject;
                     Move(MoveDirections.Right, true, false);
-                    GameObject pushedObject = Physics2D.OverlapCircle(movePoint.position + new Vector3(1f, 0f), .2f, WhatCanBePushed).gameObject;
                     IPushable pushable = pushedObject.GetComponent<IPushable>();
                     pushable.UndoPush();
                     break;
                 }
                 case MoveTypes.PUSHRIGHT:
                 {
+                    GameObject pushedObject = Physics2D.OverlapCircle(movePoint.position + new Vector3(1f, 0f), .2f, WhatCanBePushed).gameObject;
                     Move(MoveDirections.Left, true, false);
-                    GameObject pushedObject = Physics2D.OverlapCircle(movePoint.position + new Vector3(-1f, 0f), .2f, WhatCanBePushed).gameObject;
                     IPushable pushable = pushedObject.GetComponent<IPushable>();
                     pushable.UndoPush();
                     break;
