@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: 4bc923dacb9c7d347be7e06c40951c19
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - Pixica
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: f6476684d9c9bcb4095713df1dc9e675, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
