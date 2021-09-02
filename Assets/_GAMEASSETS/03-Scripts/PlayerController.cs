@@ -149,14 +149,11 @@ namespace LittleSubmarine2
                 if (Physics2D.OverlapCircle(movePoint.position + new Vector3(1f, 0f),
                     .2f, WhatStopsMovement))
                 {
-                    Debug.Log("Wall hit right");
                     //DO NOTHING
                 }
                 else if (Physics2D.OverlapCircle(movePoint.position + new Vector3(1f, 0f), .2f, WhatCanBePushed))
                 {
-                    Debug.Log("Pushing Object");
                     GameObject pushedObject = Physics2D.OverlapCircle(movePoint.position + new Vector3(rawAxis.x, 0f), .2f, WhatCanBePushed).gameObject;
-                    Debug.Log("Pushable Object Identified: " + pushedObject);
                     PushBlock(pushedObject, Vector2.right);
                 }
                 else
@@ -173,7 +170,6 @@ namespace LittleSubmarine2
             {
                 if (Physics2D.OverlapCircle(movePoint.position + new Vector3(-1f, 0f), .2f, WhatStopsMovement))
                 {
-                    Debug.Log("Wall hit left");
                     //DO NOTHING
                 }
                 else if (Physics2D.OverlapCircle(
@@ -199,7 +195,6 @@ namespace LittleSubmarine2
                 if (Physics2D.OverlapCircle(movePoint.position + new Vector3(0f, 1f), .2f,
                     WhatStopsMovement))
                 {
-                    Debug.Log("Wall hit up");
                     //DO NOTHING
                 }
                 else if (Physics2D.OverlapCircle(movePoint.position + new Vector3(0f, 1f),
@@ -224,11 +219,9 @@ namespace LittleSubmarine2
             //DOWN MOVEMENT
             else if (direction == MoveDirections.Down)
             {
-                Debug.Log("Should move down 2");
                 if (Physics2D.OverlapCircle(movePoint.position + new Vector3(0f, -1f), .2f,
                     WhatStopsMovement))
                 {
-                    Debug.Log("Wall hit down");
                     //DO NOTHING
                 }
                 else if (Physics2D.OverlapCircle(movePoint.position + new Vector3(0f, -1f),

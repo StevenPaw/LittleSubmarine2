@@ -4,12 +4,13 @@ using System.Collections.Generic;
 using LittleSubmarine2;
 using UnityEngine;
 
-public class Button : MonoBehaviour
+public class Button : MonoBehaviour, IActivator
 {
     [SerializeField] private bool activated;
     [SerializeField] private PushableTypes buttonType;
 
     private Animator animator;
+    private List<IActivatable> activatables = new List<IActivatable>();
 
     private void Start()
     {
@@ -27,11 +28,35 @@ public class Button : MonoBehaviour
             }
         }
         animator.SetBool("activated", activated);
+        CheckActivatables();
     }
 
     private void OnTriggerExit2D(Collider2D other)
     {
         activated = false;
         animator.SetBool("activated", activated);
+        CheckActivatables();
+    }
+
+    private void CheckActivatables()
+    {
+        foreach (IActivatable activatable in activatables)
+        {
+            activatable.CheckActivators();
+        }
+    }
+
+    public bool GetActivated()
+    { return activated; }
+
+    public void Activate()
+    { activated = true; }
+
+    public void DeActivate()
+    { activated = false; }
+
+    public void AddActivatable(IActivatable activatableIn)
+    {
+        activatables.Add(activatableIn);
     }
 }
