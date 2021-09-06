@@ -3,36 +3,39 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TestTouch : MonoBehaviour
+namespace LittleSubmarine2
 {
-    private TouchInputManager touchInputManager;
-    private Camera cameraMain;
-    
-    private void Awake()
+    public class TestTouch : MonoBehaviour
     {
-        touchInputManager = TouchInputManager.Instance;
-    }
+        private TouchInputManager touchInputManager;
+        private Camera cameraMain;
 
-    private void Start()
-    {
-        cameraMain = Camera.main;
-    }
+        private void Awake()
+        {
+            touchInputManager = TouchInputManager.Instance;
+        }
 
-    private void OnEnable()
-    {
-        touchInputManager.OnStartTouch += Move;
-    }
+        private void Start()
+        {
+            cameraMain = Camera.main;
+        }
 
-    private void OnDisable()
-    {
-        touchInputManager.OnEndTouch -= Move;
-    }
+        private void OnEnable()
+        {
+            touchInputManager.OnStartTouch += Move;
+        }
 
-    public void Move(Vector2 screenPosition, float time)
-    {
-        Vector3 screenCoordinates = new Vector3(screenPosition.x, screenPosition.y, cameraMain.nearClipPlane);
-        Vector3 worldCoordinates = cameraMain.ScreenToWorldPoint(screenCoordinates);
-        worldCoordinates.z = 0;
-        transform.position = worldCoordinates;
+        private void OnDisable()
+        {
+            touchInputManager.OnEndTouch -= Move;
+        }
+
+        public void Move(Vector2 screenPosition, float time)
+        {
+            Vector3 screenCoordinates = new Vector3(screenPosition.x, screenPosition.y, cameraMain.nearClipPlane);
+            Vector3 worldCoordinates = cameraMain.ScreenToWorldPoint(screenCoordinates);
+            worldCoordinates.z = 0;
+            transform.position = worldCoordinates;
+        }
     }
 }

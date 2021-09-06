@@ -20,7 +20,7 @@ namespace LittleSubmarine2
 
         public void OnBackToMenu()
         {
-            SceneManager.LoadScene(Scenes.MAINMENU);
+            SceneManager.LoadScene(Scenes.LEVELMENU);
         }
         
         public void OnNextLevel()

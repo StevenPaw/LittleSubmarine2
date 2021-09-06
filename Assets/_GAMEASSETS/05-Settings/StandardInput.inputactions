@@ -273,6 +273,33 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "Menu",
+            "id": "f7494ad0-843e-4c1d-810a-1711edee3b61",
+            "actions": [
+                {
+                    "name": "Back",
+                    "type": "Button",
+                    "id": "70c0a5d7-ad61-4a0e-9664-0cd0117e3c2a",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "07ed65c2-bb56-4733-b109-6fef2bb6f6fe",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Back",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []
