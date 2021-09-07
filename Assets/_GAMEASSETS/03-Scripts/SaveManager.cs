@@ -25,7 +25,8 @@ namespace LittleSubmarine2
                 Destroy(this.gameObject);
                 Debug.Log("SaveManager destroyed");
             }
-            
+
+            saveFilePath = Application.persistentDataPath;
             activeSaveData = GameObject.FindGameObjectWithTag(GameTags.ACTIVESAVEDATA).GetComponent<ActiveSaveData>();
             
             LoadGame();
