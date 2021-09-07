@@ -28,9 +28,7 @@ namespace LittleSubmarine2
             
             activeSaveData = GameObject.FindGameObjectWithTag(GameTags.ACTIVESAVEDATA).GetComponent<ActiveSaveData>();
             
-            //Load the game at the beginning
             LoadGame();
-            
         }
 
         //Saving Game etc.
@@ -48,8 +46,7 @@ namespace LittleSubmarine2
 
         public void ClearSave()
         {
-            playerData = new PlayerData();
-            activeSaveData.SetData(playerData);
+            activeSaveData.ClearData();
             SaveGame();
         }
         

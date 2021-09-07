@@ -1,6 +1,7 @@
 using System.IO.MemoryMappedFiles;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 namespace LittleSubmarine2
 {
@@ -153,7 +154,7 @@ namespace LittleSubmarine2
                 }
                 else if (Physics2D.OverlapCircle(movePoint.position + new Vector3(1f, 0f), .2f, WhatCanBePushed))
                 {
-                    GameObject pushedObject = Physics2D.OverlapCircle(movePoint.position + new Vector3(rawAxis.x, 0f), .2f, WhatCanBePushed).gameObject;
+                    GameObject pushedObject = Physics2D.OverlapCircle(movePoint.position + new Vector3(1f, 0f), .2f, WhatCanBePushed).gameObject;
                     PushBlock(pushedObject, Vector2.right);
                 }
                 else
@@ -175,7 +176,7 @@ namespace LittleSubmarine2
                 else if (Physics2D.OverlapCircle(
                     movePoint.position + new Vector3(-1f, 0f), .2f, WhatCanBePushed))
                 {
-                    GameObject pushedObject = Physics2D.OverlapCircle(movePoint.position + new Vector3(rawAxis.x, 0f), .2f, WhatCanBePushed).gameObject;
+                    GameObject pushedObject = Physics2D.OverlapCircle(movePoint.position + new Vector3(-1f, 0f), .2f, WhatCanBePushed).gameObject;
 
                     PushBlock(pushedObject, Vector2.left);
                 }
@@ -201,7 +202,7 @@ namespace LittleSubmarine2
                     .2f, WhatCanBePushed))
                 {
                     GameObject pushedObject = Physics2D.OverlapCircle(
-                            movePoint.position + new Vector3(0f, rawAxis.y), .2f,
+                            movePoint.position + new Vector3(0f, 1f), .2f,
                             WhatCanBePushed)
                         .gameObject;
 
@@ -228,7 +229,7 @@ namespace LittleSubmarine2
                     .2f, WhatCanBePushed))
                 {
                     GameObject pushedObject = Physics2D.OverlapCircle(
-                            movePoint.position + new Vector3(0f, rawAxis.y), .2f,
+                            movePoint.position + new Vector3(0f, -1f), .2f,
                             WhatCanBePushed)
                         .gameObject;
 
@@ -343,6 +344,35 @@ namespace LittleSubmarine2
             }
         }
 
+        public void BTN_Up()
+        {
+            if (canMove)
+            {
+                Move(MoveDirections.Up, false,true);
+            }
+        }
+        public void BTN_Down()
+        {
+            if (canMove)
+            {
+                Move(MoveDirections.Down, false,true);
+            }
+        }
+        public void BTN_Left()
+        {
+            if (canMove)
+            {
+                Move(MoveDirections.Left, false,true);
+            }
+        }
+        public void BTN_Right()
+        {
+            if (canMove)
+            {
+                Move(MoveDirections.Right, false,true);
+            }
+        }
+
         public void BTN_Undo(InputAction.CallbackContext ctx)
         {
             if (ctx.started)
@@ -352,6 +382,19 @@ namespace LittleSubmarine2
                     UndoMovement();
                 }
             }
+        }
+        
+        public void BTN_Undo()
+        {
+            if (canMove)
+            {
+                UndoMovement();
+            }
+        }
+
+        public void BTN_BackToMenu()
+        {
+            SceneManager.LoadScene(Scenes.LEVELOVERVIEW);
         }
 
         public void BTN_Move(InputAction.CallbackContext ctx)

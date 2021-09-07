@@ -13,6 +13,12 @@ namespace LittleSubmarine2
         [SerializeField] private Animator creditsAnimator;
         [SerializeField] private Animator optionsAnimator;
         [SerializeField] private string levelOverviewScene;
+        private SaveManager saveManager;
+
+        private void Start()
+        {
+            saveManager = GameObject.FindGameObjectWithTag(GameTags.SAVEMANAGER).GetComponent<SaveManager>();
+        }
 
         public void ToMenu()
         {
@@ -38,6 +44,11 @@ namespace LittleSubmarine2
         public void ToLevelOverview()
         {
             SceneManager.LoadScene(levelOverviewScene);
+        }
+
+        public void ClearSaves()
+        {
+            saveManager.ClearSave();
         }
 
         public void CloseGame()

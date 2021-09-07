@@ -29,7 +29,6 @@ namespace LittleSubmarine2
 
             saveManager = GameObject.FindGameObjectWithTag(GameTags.SAVEMANAGER).GetComponent<SaveManager>();
             InitializeLevels();
-            saveManager.LoadGame();
         }
 
         /// <summary>
@@ -39,6 +38,12 @@ namespace LittleSubmarine2
         public void SetData(PlayerData playerDataIn)
         {
             playerData = playerDataIn;
+        }
+
+        public void ClearData()
+        {
+            playerData = new PlayerData();
+            InitializeLevels();
         }
 
         /// <summary>
@@ -60,7 +65,6 @@ namespace LittleSubmarine2
 
         private void InitializeLevels()
         {
-            Debug.Log("Creating Level Files");
             for (int i = 0; i < amountOfWorlds; i++)
             {
                 bool levelCompleted = false;
