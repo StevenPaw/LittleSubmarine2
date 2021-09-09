@@ -7,13 +7,13 @@ namespace LittleSubmarine2
     {
         [SerializeField] private int world;
         [SerializeField] private int level;
-        private ActiveSaveData activeSaveData;
+        private SaveManager saveManager;
         private bool isAvailable = false;
         private UnityEngine.UI.Button button;
         
         private void Start()
         {
-            activeSaveData = GameObject.FindGameObjectWithTag(GameTags.ACTIVESAVEDATA).GetComponent<ActiveSaveData>();
+            saveManager = GameObject.FindGameObjectWithTag(GameTags.SAVEMANAGER).GetComponent<SaveManager>();
             button = GetComponent<UnityEngine.UI.Button>();
             isAvailable = GetAvailability();
             button.interactable = isAvailable;
@@ -21,9 +21,9 @@ namespace LittleSubmarine2
 
         private bool GetAvailability()
         {
-            if ((world * 9) + level > 1)
+            if ((world * 9) + level > 0)
             {
-                bool levels = activeSaveData.GetData().levelCompleted[(world * 9) + level - 1];
+                bool levels = saveManager.GetData().levelCompleted[(world * 9) + level - 1];
                 return levels;
             }
             else

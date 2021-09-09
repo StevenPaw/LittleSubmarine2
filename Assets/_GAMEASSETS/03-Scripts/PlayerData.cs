@@ -9,6 +9,6 @@ namespace LittleSubmarine2
     {
         //All information that need to be saved
         public string dateTimeOfSave;
-        public List<bool> levelCompleted = new List<bool>();
+        public bool[] levelCompleted = new bool[200];
     }
 }

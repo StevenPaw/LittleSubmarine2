@@ -11,12 +11,10 @@ namespace LittleSubmarine2
         [SerializeField] private int world;
         [SerializeField] private int level;
 
-        private ActiveSaveData activeSaveData;
         private SaveManager saveManager;
 
         private void Start()
         {
-            activeSaveData = GameObject.FindGameObjectWithTag(GameTags.ACTIVESAVEDATA).GetComponent<ActiveSaveData>();
             saveManager = GameObject.FindGameObjectWithTag(GameTags.SAVEMANAGER).GetComponent<SaveManager>();
         }
 
@@ -26,7 +24,7 @@ namespace LittleSubmarine2
             {
                 levelCompleteWindow.SetActive(true);
                 other.GetComponent<PlayerController>().SetCanMove(false);
-                activeSaveData.AddLevel(world, level);
+                saveManager.AddCompletedLevel(world, level);
                 saveManager.SaveGame();
             }
         }

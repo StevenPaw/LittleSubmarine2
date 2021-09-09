@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
@@ -11,8 +12,7 @@ namespace LittleSubmarine2
 
         private string saveFilePath; //The path where the saveFiles are stored
         private PlayerData playerData;
-        private ActiveSaveData activeSaveData;
-        
+
         private void Start()
         {
             if (GameObject.FindGameObjectWithTag(GameTags.SAVEMANAGER) == this.gameObject)
@@ -27,7 +27,6 @@ namespace LittleSubmarine2
             }
 
             saveFilePath = Application.persistentDataPath;
-            activeSaveData = GameObject.FindGameObjectWithTag(GameTags.ACTIVESAVEDATA).GetComponent<ActiveSaveData>();
             
             LoadGame();
         }
@@ -36,43 +35,73 @@ namespace LittleSubmarine2
 
         public void SaveGame()
         {
-            SaveFileToJson();
+            playerData.dateTimeOfSave = DateTime.Now.ToString("dd.MM.yyyy hh:mm:ss");
+            WriteDataToJson();
         }
 
         public void LoadGame()
         {
-            playerData = LoadFromJson();
-            activeSaveData.SetData(playerData);
+            playerData = ReadDataFromJson();
         }
 
         public void ClearSave()
         {
-            activeSaveData.ClearData();
-            SaveGame();
+            Debug.Log("Deleting Save " + saveFilePath + fileName + fileEnding);
+            File.Delete(saveFilePath + fileName + fileEnding);
+            playerData = new PlayerData();
+            //LoadGame();
         }
         
-        private PlayerData LoadFromJson()
-        {
-            PlayerData playerDataOut = new PlayerData();
-            if (File.Exists(saveFilePath + "/" + fileName + fileEnding))
-            {
-                string loadedPlayerData = File.ReadAllText(saveFilePath + "/" + fileName + fileEnding);
-                playerDataOut = JsonUtility.FromJson<PlayerData>(loadedPlayerData);
+        public void WriteDataToJson() {
+            string dataString;
+            string jsonFilePath = DataPath();
+            CheckFileExistance(jsonFilePath);
+ 
+            dataString = JsonUtility.ToJson(playerData);
+            File.WriteAllText(jsonFilePath, dataString);
+        }
+        
+        public PlayerData ReadDataFromJson() {
+            string dataString;
+            string jsonFilePath = DataPath();
+            CheckFileExistance(jsonFilePath, true);
+ 
+            dataString = File.ReadAllText(jsonFilePath);
+            playerData = JsonUtility.FromJson<PlayerData>(dataString);
+            return playerData;
+        }
+        
+        public void CheckFileExistance(string filePath, bool isReading = false) {
+            Debug.Log("Checking File! " + filePath);
+            if (!File.Exists(filePath)){
+                File.Create(filePath).Close();
+                if (isReading) {
+                    Debug.Log("PlayerData is empty! " + filePath);
+                    playerData = new PlayerData();
+                    playerData.levelCompleted = new bool[200];
+                    string dataString = JsonUtility.ToJson(playerData);
+                    File.WriteAllText(filePath, dataString);
+                }
             }
-            else
-            {
-                Debug.Log("No PlayerData SaveFile found");
+        }
+        
+        public string DataPath() {
+            if (Directory.Exists(Application.persistentDataPath)) {
+                return Path.Combine(Application.persistentDataPath, fileName + fileEnding);
             }
+            return Path.Combine(Application.streamingAssetsPath, fileName + fileEnding);
+        }
 
-            return playerDataOut;
-        }
-        
-        private void SaveFileToJson()
+        public PlayerData GetData()
         {
-            playerData = activeSaveData.GetData();
-            playerData.dateTimeOfSave = DateTime.Now.ToString("dd.MM.yyyy hh:mm:ss");
-            string playerDataToSave = JsonUtility.ToJson(playerData);
-            File.WriteAllText(saveFilePath + "/" + fileName + fileEnding, playerDataToSave);
+            Debug.Log("PlayerData: " + playerData.levelCompleted);
+            return playerData;
+        }
+
+        public void AddCompletedLevel(int world, int level)
+        {
+            playerData.levelCompleted[(world * 9) + level] = true;
+            SaveGame();
         }
     }
 }

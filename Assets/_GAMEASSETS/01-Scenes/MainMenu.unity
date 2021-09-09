@@ -1433,6 +1433,7 @@ MonoBehaviour:
   creditsAnimator: {fileID: 204367347}
   optionsAnimator: {fileID: 1618532918}
   levelOverviewScene: LevelOverview
+  tutorialLevel: TutorialLevel
 --- !u!114 &1193603058
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -77,7 +77,7 @@ namespace LittleSubmarine2
         {
             if (SceneManager.GetSceneByName("Level" + activeWorld + "-" + levelToLoad) != null)
             {
-                SceneManager.LoadScene(levelToLoad);
+                SceneManager.LoadScene("Level" + activeWorld + "-" + levelToLoad);
             }
         }
     }

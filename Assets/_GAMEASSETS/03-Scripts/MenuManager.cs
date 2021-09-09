@@ -13,6 +13,7 @@ namespace LittleSubmarine2
         [SerializeField] private Animator creditsAnimator;
         [SerializeField] private Animator optionsAnimator;
         [SerializeField] private string levelOverviewScene;
+        [SerializeField] private string tutorialLevel;
         private SaveManager saveManager;
 
         private void Start()
@@ -43,7 +44,14 @@ namespace LittleSubmarine2
 
         public void ToLevelOverview()
         {
-            SceneManager.LoadScene(levelOverviewScene);
+            if (saveManager.GetData().levelCompleted[0])
+            {
+                SceneManager.LoadScene(levelOverviewScene);
+            }
+            else
+            {
+                SceneManager.LoadScene(tutorialLevel);
+            }
         }
 
         public void ClearSaves()
