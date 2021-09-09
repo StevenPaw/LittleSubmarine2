@@ -252,11 +252,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04c15fbd670b4d988d260f8d98444808, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerData:
-    dateTimeOfSave: 
-    levelCompleted: 
-  amountOfLevels: 9
-  amountOfWorlds: 3
 --- !u!4 &200081555
 Transform:
   m_ObjectHideFlags: 0
