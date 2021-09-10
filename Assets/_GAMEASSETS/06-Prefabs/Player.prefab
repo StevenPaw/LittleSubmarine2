@@ -145,6 +145,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
+  arrowButtons: {fileID: 6345775053246682724}
   movePoint: {fileID: 1983066708401229109}
   WhatStopsMovement:
     serializedVersion: 2
@@ -1120,7 +1121,7 @@ GameObject:
   - component: {fileID: 5256653296667620318}
   - component: {fileID: 5500029053354976811}
   m_Layer: 5
-  m_Name: Panel
+  m_Name: SteeringWheel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

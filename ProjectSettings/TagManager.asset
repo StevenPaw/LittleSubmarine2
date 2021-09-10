@@ -60,3 +60,6 @@ TagManager:
   - name: UI
     uniqueID: 2507610365
     locked: 0
+  - name: Tutorial
+    uniqueID: 378334625
+    locked: 0

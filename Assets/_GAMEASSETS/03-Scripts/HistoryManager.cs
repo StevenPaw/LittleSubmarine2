@@ -19,7 +19,6 @@ namespace LittleSubmarine2
             {
                 MoveTypes output = moves[moves.Count - 1];
                 moves.RemoveAt(moves.Count - 1);
-                Debug.Log("Last Move was " + output);
                 return output;
             }
             else

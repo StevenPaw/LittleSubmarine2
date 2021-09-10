@@ -8,17 +8,17 @@ namespace LittleSubmarine2
     public class PlayerController : MonoBehaviour
     {
         [Range(0.0f, 10.0f)] [SerializeField] private float moveSpeed = 5f;
+        [SerializeField] private GameObject arrowButtons;
         [SerializeField] private Transform movePoint;
 
         [SerializeField] private LayerMask WhatStopsMovement;
         [SerializeField] private LayerMask WhatCanBePushed;
 
         [SerializeField] private Animator anim;
-
         [SerializeField] private bool canMove = true;
-
+        
         private HistoryManager history;
-
+        private SettingsManager settings;
         private Vector2 rawAxis;
 
         private void Start()
@@ -26,6 +26,8 @@ namespace LittleSubmarine2
             movePoint.parent = null;
             rawAxis = Vector2.zero;
             history = GetComponent<HistoryManager>();
+            settings = GameObject.FindGameObjectWithTag(GameTags.SETTINGSMANAGER).GetComponent<SettingsManager>();
+            UpdateArrowButtons();
         }
 
         private void Update()
@@ -341,6 +343,18 @@ namespace LittleSubmarine2
                 {
                     break;
                 }
+            }
+        }
+
+        public void UpdateArrowButtons()
+        {
+            if (settings.ShowSteeringWheel)
+            {
+                arrowButtons.SetActive(true);
+            }
+            else
+            {
+                arrowButtons.SetActive(false);
             }
         }
 

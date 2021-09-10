@@ -4,59 +4,78 @@ using System.Collections.Generic;
 using LittleSubmarine2;
 using UnityEngine;
 
-public class Button : MonoBehaviour, IActivator
+namespace LittleSubmarine2
 {
-    [SerializeField] private bool activated;
-    [SerializeField] private PushableTypes buttonType;
-
-    private Animator animator;
-    private List<IActivatable> activatables = new List<IActivatable>();
-
-    private void Start()
+    public class Button : MonoBehaviour, IActivator
     {
-        animator = GetComponent<Animator>();
-    }
+        [SerializeField] private bool activated;
+        [SerializeField] private PushableTypes buttonType;
 
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        IPushable pushable = other.GetComponent<IPushable>();
-        if (pushable != null)
+        private Animator animator;
+        private List<IActivatable> activatables = new List<IActivatable>();
+
+        private void Start()
         {
-            if (pushable.GetPushableType() == buttonType)
+            animator = GetComponent<Animator>();
+        }
+
+        private void OnTriggerEnter2D(Collider2D other)
+        {
+            IPushable pushable = other.GetComponent<IPushable>();
+            if (pushable != null)
             {
-                activated = true;
+                if (pushable.GetPushableType() == buttonType)
+                {
+                    activated = true;
+                }
+            }
+
+            animator.SetBool("activated", activated);
+            CheckActivatables();
+            Debug.Log("Entered Button!");
+        }
+
+        private void OnTriggerExit2D(Collider2D other)
+        {
+            IPushable pushable = other.GetComponent<IPushable>();
+            if (pushable != null)
+            {
+                if (pushable.GetPushableType() == buttonType)
+                {
+                    activated = false;
+                }
+            }
+
+            animator.SetBool("activated", activated);
+            CheckActivatables();
+        }
+
+        private void CheckActivatables()
+        {
+            foreach (IActivatable activatable in activatables)
+            {
+                activatable.CheckActivators();
             }
         }
-        animator.SetBool("activated", activated);
-        CheckActivatables();
-    }
 
-    private void OnTriggerExit2D(Collider2D other)
-    {
-        activated = false;
-        animator.SetBool("activated", activated);
-        CheckActivatables();
-    }
-
-    private void CheckActivatables()
-    {
-        foreach (IActivatable activatable in activatables)
+        public bool GetActivated()
         {
-            activatable.CheckActivators();
+            return activated;
         }
-    }
 
-    public bool GetActivated()
-    { return activated; }
+        public void Activate()
+        {
+            activated = true;
+        }
 
-    public void Activate()
-    { activated = true; }
+        public void DeActivate()
+        {
+            activated = false;
+        }
 
-    public void DeActivate()
-    { activated = false; }
-
-    public void AddActivatable(IActivatable activatableIn)
-    {
-        activatables.Add(activatableIn);
+        public void AddActivatable(IActivatable activatableIn)
+        {
+            activatables.Add(activatableIn);
+        }
     }
 }

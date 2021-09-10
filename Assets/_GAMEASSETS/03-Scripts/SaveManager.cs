@@ -47,7 +47,7 @@ namespace LittleSubmarine2
         public void ClearSave()
         {
             Debug.Log("Deleting Save " + saveFilePath + fileName + fileEnding);
-            File.Delete(saveFilePath + fileName + fileEnding);
+            File.Delete(saveFilePath + "/" + fileName + fileEnding);
             playerData = new PlayerData();
             //LoadGame();
         }
