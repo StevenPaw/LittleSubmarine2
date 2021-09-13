@@ -2,8 +2,8 @@
     "m_SelectedDeviceId": "WCR7N19111009715",
     "m_SelectedPackage": {
         "deviceId": "WCR7N19111009715",
-        "name": "com.DefaultCompany.com.unity.template.mobile2D",
-        "processId": 21834,
+        "name": "com.StevenPaw.LittleSubmarine2",
+        "processId": 2573,
         "exited": false
     },
     "m_SelectedPriority": 0,
@@ -108,6 +108,12 @@
             "deviceId": "WCR7N19111009715",
             "name": "com.DefaultCompany.com.unity.template.mobile2D",
             "processId": 21834,
+            "exited": false
+        },
+        {
+            "deviceId": "WCR7N19111009715",
+            "name": "com.StevenPaw.LittleSubmarine2",
+            "processId": 2573,
             "exited": false
         }
     ],

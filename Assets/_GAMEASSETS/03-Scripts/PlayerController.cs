@@ -28,6 +28,7 @@ namespace LittleSubmarine2
             history = GetComponent<HistoryManager>();
             settings = GameObject.FindGameObjectWithTag(GameTags.SETTINGSMANAGER).GetComponent<SettingsManager>();
             UpdateArrowButtons();
+            SwipeManager.OnSwipeDetected += OnSwipeDetected;
         }
 
         private void Update()
@@ -422,6 +423,26 @@ namespace LittleSubmarine2
         public void BTN_Pause(InputAction.CallbackContext ctx)
         {
             //pauseMenu.PauseGame();
+        }
+
+        public void OnSwipeDetected (Swipe direction, Vector2 swipeVelocity)
+        {
+            Debug.Log("Swipe detected: " + direction);
+            switch (direction)
+            {
+                case Swipe.Down:
+                    Move(MoveDirections.Down, false,true); 
+                    break;
+                case Swipe.Up:
+                    Move(MoveDirections.Up, false,true); 
+                    break;
+                case Swipe.Left:
+                    Move(MoveDirections.Left, false,true); 
+                    break;
+                case Swipe.Right:
+                    Move(MoveDirections.Right, false,true); 
+                    break;
+            }
         }
 
         public enum MoveDirections
