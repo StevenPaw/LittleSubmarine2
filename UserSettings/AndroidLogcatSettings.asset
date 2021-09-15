@@ -3,7 +3,7 @@
     "m_SelectedPackage": {
         "deviceId": "WCR7N19111009715",
         "name": "com.StevenPaw.LittleSubmarine2",
-        "processId": 2573,
+        "processId": 3493,
         "exited": false
     },
     "m_SelectedPriority": 0,
@@ -114,6 +114,18 @@
             "deviceId": "WCR7N19111009715",
             "name": "com.StevenPaw.LittleSubmarine2",
             "processId": 2573,
+            "exited": false
+        },
+        {
+            "deviceId": "WCR7N19111009715",
+            "name": "com.StevenPaw.LittleSubmarine2",
+            "processId": 3178,
+            "exited": false
+        },
+        {
+            "deviceId": "WCR7N19111009715",
+            "name": "com.StevenPaw.LittleSubmarine2",
+            "processId": 3493,
             "exited": false
         }
     ],

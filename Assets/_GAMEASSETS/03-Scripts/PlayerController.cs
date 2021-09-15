@@ -14,7 +14,8 @@ namespace LittleSubmarine2
         [SerializeField] private LayerMask WhatStopsMovement;
         [SerializeField] private LayerMask WhatCanBePushed;
 
-        [SerializeField] private Animator anim;
+        [SerializeField] private GameObject playerSpriteGO;
+        private Animator anim;
         [SerializeField] private bool canMove = true;
         
         private HistoryManager history;
@@ -23,6 +24,7 @@ namespace LittleSubmarine2
 
         private void Start()
         {
+            anim = playerSpriteGO.GetComponent<Animator>();
             movePoint.parent = null;
             rawAxis = Vector2.zero;
             history = GetComponent<HistoryManager>();
