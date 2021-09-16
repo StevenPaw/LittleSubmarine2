@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace LittleSubmarine2
 {
-    public class Button : MonoBehaviour, IActivator
+    public class FishButton : MonoBehaviour, IActivator
     {
         [SerializeField] private bool activated;
         [SerializeField] private PushableTypes buttonType;

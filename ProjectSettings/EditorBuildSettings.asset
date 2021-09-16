@@ -12,11 +12,14 @@ EditorBuildSettings:
     path: Assets/_GAMEASSETS/01-Scenes/MainMenu.unity
     guid: b4dd772504e9c0e46a243b2c7671c314
   - enabled: 1
-    path: Assets/_GAMEASSETS/01-Scenes/Levels/TutorialLevel.unity
-    guid: ed767d08e2ebc0e488636bce7bed58cf
-  - enabled: 1
     path: Assets/_GAMEASSETS/01-Scenes/LevelOverview.unity
     guid: d296885566c733a439a7db94a62f8e05
+  - enabled: 1
+    path: Assets/_GAMEASSETS/01-Scenes/DecoShop.unity
+    guid: f678d4716e89b1547963bef42654cc84
+  - enabled: 1
+    path: Assets/_GAMEASSETS/01-Scenes/Levels/TutorialLevel.unity
+    guid: ed767d08e2ebc0e488636bce7bed58cf
   - enabled: 1
     path: Assets/_GAMEASSETS/01-Scenes/Levels/World0/Level0-1.unity
     guid: e3bc280e3c74cb34890a6449d2d08498

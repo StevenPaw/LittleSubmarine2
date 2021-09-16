@@ -211,16 +211,16 @@ Canvas:
   m_GameObject: {fileID: 30171731}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 1
+  m_RenderMode: 0
   m_Camera: {fileID: 1073330380}
-  m_PlaneDistance: 100
+  m_PlaneDistance: 10
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 1
-  m_SortingLayerID: 0
+  m_SortingLayerID: 378334625
   m_SortingOrder: 1
   m_TargetDisplay: 0
 --- !u!1 &229410888
@@ -373,7 +373,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadeDuration: 2
-  fadeDelay: 8
+  fadeDelay: 3
   preloaderSceneName: PreLoader
   sceneToLoadAfterPreload: MainMenu
   blackBGRenderer: {fileID: 1917984237}
@@ -480,7 +480,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.1
-  far clip plane: 0.2
+  far clip plane: 173.8
   field of view: 2.5
   orthographic: 1
   orthographic size: 8.58

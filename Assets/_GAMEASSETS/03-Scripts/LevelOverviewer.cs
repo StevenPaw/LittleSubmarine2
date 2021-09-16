@@ -80,5 +80,10 @@ namespace LittleSubmarine2
                 SceneManager.LoadScene("Level" + activeWorld + "-" + levelToLoad);
             }
         }
+
+        public void BTN_OpenShop()
+        {
+            SceneManager.LoadScene(Scenes.DECOSHOP);
+        }
     }
 }

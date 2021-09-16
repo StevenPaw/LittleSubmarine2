@@ -10,6 +10,7 @@ namespace LittleSubmarine2
         [SerializeField] private string nextLevel;
         [SerializeField] private int world;
         [SerializeField] private int level;
+        [SerializeField] private int coinsForCompletion;
 
         private SaveManager saveManager;
 

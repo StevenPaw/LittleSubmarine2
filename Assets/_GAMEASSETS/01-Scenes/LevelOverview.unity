@@ -5454,7 +5454,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2077481419}
         m_TargetAssemblyTypeName: LittleSubmarine2.LevelOverviewer, Assembly-CSharp
-        m_MethodName: BackToMenu
+        m_MethodName: BTN_OpenShop
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

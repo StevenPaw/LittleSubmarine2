@@ -1,3 +1,4 @@
+using System;
 using System.IO.MemoryMappedFiles;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -30,7 +31,16 @@ namespace LittleSubmarine2
             history = GetComponent<HistoryManager>();
             settings = GameObject.FindGameObjectWithTag(GameTags.SETTINGSMANAGER).GetComponent<SettingsManager>();
             UpdateArrowButtons();
+        }
+
+        private void OnEnable()
+        {
             SwipeManager.OnSwipeDetected += OnSwipeDetected;
+        }
+
+        private void OnDisable()
+        {
+            SwipeManager.OnSwipeDetected -= OnSwipeDetected;
         }
 
         private void Update()
@@ -74,6 +84,7 @@ namespace LittleSubmarine2
 
         private void Move(MoveDirections direction, bool animateInverted, bool saveHistory)
         {
+            
             if (!animateInverted)
             {
                 //Set Animations
@@ -429,7 +440,6 @@ namespace LittleSubmarine2
 
         public void OnSwipeDetected (Swipe direction, Vector2 swipeVelocity)
         {
-            Debug.Log("Swipe detected: " + direction);
             switch (direction)
             {
                 case Swipe.Down:

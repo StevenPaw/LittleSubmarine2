@@ -5,5 +5,6 @@
         public static string MAINMENU = "MainMenu";
         public static string OPTIONSMENU = "OptionsMenu";
         public static string LEVELOVERVIEW = "LevelOverview";
+        public static string DECOSHOP = "DecoShop";
     }
 }

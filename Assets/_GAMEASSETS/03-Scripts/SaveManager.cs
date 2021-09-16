@@ -103,5 +103,53 @@ namespace LittleSubmarine2
             playerData.levelCompleted[(world * 9) + level] = true;
             SaveGame();
         }
+
+        /// <summary>
+        /// Increase or Decrease the amount of coins the player has
+        /// </summary>
+        /// <param name="coinsIn"></param>
+        public void ChangeCoins(int coinsIn)
+        {
+            playerData.coins += coinsIn;
+        }
+
+        /// <summary>
+        /// Get the amount of money the player has
+        /// </summary>
+        /// <returns></returns>
+        public int GetCoins()
+        {
+            return playerData.coins;
+        }
+
+        public bool[] GetBoughtPeriscopes()
+        {
+            return playerData.boughtPeriscopes;
+        }
+        
+        public bool[] GetBoughtBodies()
+        {
+            return playerData.boughtBodies;
+        }
+
+        public void BuyBody(int idIn, int costIn)
+        {
+            playerData.coins -= costIn;
+            playerData.boughtBodies[idIn] = true;
+            SaveGame();
+        }
+        
+        public void BuyPeriscope(int idIn, int costIn)
+        {
+            playerData.coins -= costIn;
+            playerData.boughtPeriscopes[idIn] = true;
+            SaveGame();
+        }
+
+        public void SelectSubmarine(int periscopeID, int bodyID)
+        {
+            playerData.selectedBody = bodyID;
+            playerData.selectedPeriscope = periscopeID;
+        }
     }
 }

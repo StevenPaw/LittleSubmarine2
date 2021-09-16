@@ -22,12 +22,9 @@ namespace LittleSubmarine2
         [SerializeField] private float logoAnimationTime; //how long the animation should take
         [SerializeField] private GameObject blackBG;
 
-        private GameManager gameManager;
-        
         private void Start()
         {
-            gameManager = GameObject.FindGameObjectWithTag(GameTags.GAMEMANAGER).GetComponent<GameManager>();
-            SceneManager.LoadScene(sceneToLoadAfterPreload, LoadSceneMode.Additive); //Load Scene after preload
+            SceneManager.LoadSceneAsync(sceneToLoadAfterPreload, LoadSceneMode.Additive); //Load Scene after preload
             blackBGRenderer.DOFade(0, fadeDuration).SetDelay(fadeDelay).OnComplete(ClosePreloader); //Fadeout the black Background
 
             lunasnailLogo.transform.localScale = Vector3.one * logoStartSize;
@@ -44,6 +41,7 @@ namespace LittleSubmarine2
         /// </summary>
         private void ClosePreloader()
         {
+            Debug.Log("Closing Preloader");
             blackBG.SetActive(false);
             SceneManager.UnloadSceneAsync(preloaderSceneName);
         }
