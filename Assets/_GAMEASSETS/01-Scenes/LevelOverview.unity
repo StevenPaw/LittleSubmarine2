@@ -7010,7 +7010,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 58.75
+  m_fontSize: 84.5
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -15465,6 +15465,7 @@ MonoBehaviour:
   - {fileID: 1182988270}
   - {fileID: 1288439041}
   activeWorld: 0
+  moneyText: {fileID: 855291063}
 --- !u!1 &2087498306
 GameObject:
   m_ObjectHideFlags: 0

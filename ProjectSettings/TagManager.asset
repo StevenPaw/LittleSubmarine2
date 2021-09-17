@@ -8,6 +8,8 @@ TagManager:
   - ActiveSaveData
   - SaveManager
   - SettingsManager
+  - PartManager
+  - NotificationManager
   layers:
   - Default
   - TransparentFX

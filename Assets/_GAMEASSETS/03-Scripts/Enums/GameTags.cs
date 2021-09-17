@@ -8,6 +8,8 @@ namespace LittleSubmarine2
         public static string SAVEMANAGER = "SaveManager";
         public static string ACTIVESAVEDATA = "ActiveSaveData";
         public static string SETTINGSMANAGER = "SettingsManager";
+        public static string PARTMANAGER = "PartManager";
+        public static string NOTIFICATIONMANAGER = "NotificationManager";
 
         public static string PUSHABLE = "pushable";
         public static string EXPLOSIVE = "explosive";

@@ -9,7 +9,7 @@ namespace LittleSubmarine2
     {
         //All information that need to be saved
         public string dateTimeOfSave;
-        public bool[] levelCompleted = new bool[200];
+        public int[] levelCompleted = new int[200];
         
         //Shopdata
         public int coins;

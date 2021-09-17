@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 namespace LittleSubmarine2
 {
@@ -14,11 +15,20 @@ namespace LittleSubmarine2
         [SerializeField] private Animator optionsAnimator;
         [SerializeField] private string levelOverviewScene;
         [SerializeField] private string tutorialLevel;
+
+        [SerializeField] private Image submarineBody;
+        [SerializeField] private Image submarinePeriscope;
+        
         private SaveManager saveManager;
+        private PartManager partManager;
 
         private void Start()
         {
             saveManager = GameObject.FindGameObjectWithTag(GameTags.SAVEMANAGER).GetComponent<SaveManager>();
+            partManager = GameObject.FindGameObjectWithTag(GameTags.PARTMANAGER).GetComponent<PartManager>();
+            
+            submarineBody.sprite = partManager.GetBodyByID(saveManager.GetData().selectedBody).SpriteImage;
+            submarinePeriscope.sprite = partManager.GetPeriscopeByID(saveManager.GetData().selectedPeriscope).SpriteImage;
         }
 
         public void ToMenu()
@@ -44,7 +54,7 @@ namespace LittleSubmarine2
 
         public void ToLevelOverview()
         {
-            if (saveManager.GetData().levelCompleted[0])
+            if (saveManager.GetData().levelCompleted[0] > 0)
             {
                 SceneManager.LoadScene(levelOverviewScene);
             }

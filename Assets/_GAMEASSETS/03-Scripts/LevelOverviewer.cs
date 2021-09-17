@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -14,17 +15,16 @@ namespace LittleSubmarine2
         [SerializeField] private GameObject[] leftArrows;
         [SerializeField] private GameObject[] rightArrows;
         [SerializeField] private int activeWorld = 0;
+        [SerializeField] private TMP_Text moneyText;
+        private SaveManager saveManager;
 
         private void Start()
         {
+            saveManager = GameObject.FindGameObjectWithTag(GameTags.SAVEMANAGER).GetComponent<SaveManager>();
+            moneyText.text = saveManager.GetCoins().ToString();
             UpdateWorldVisibility();
         }
 
-        public void OnEscape(InputAction.CallbackContext ctx)
-        {
-            BackToMenu();
-        }
-        
         public void BackToMenu()
         {
             SceneManager.LoadScene(mainMenuSceneName);
@@ -84,6 +84,11 @@ namespace LittleSubmarine2
         public void BTN_OpenShop()
         {
             SceneManager.LoadScene(Scenes.DECOSHOP);
+        }
+        
+        public void OnEscape(InputAction.CallbackContext ctx)
+        {
+            BackToMenu();
         }
     }
 }

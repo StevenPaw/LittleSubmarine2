@@ -41,7 +41,6 @@ namespace LittleSubmarine2
         /// </summary>
         private void ClosePreloader()
         {
-            Debug.Log("Closing Preloader");
             blackBG.SetActive(false);
             SceneManager.UnloadSceneAsync(preloaderSceneName);
         }

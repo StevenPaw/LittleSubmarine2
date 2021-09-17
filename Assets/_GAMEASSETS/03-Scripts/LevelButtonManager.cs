@@ -23,7 +23,7 @@ namespace LittleSubmarine2
         {
             if ((world * 9) + level > 0)
             {
-                bool levels = saveManager.GetData().levelCompleted[(world * 9) + level - 1];
+                bool levels = saveManager.GetData().levelCompleted[(world * 9) + level - 1] > 0;
                 return levels;
             }
             else

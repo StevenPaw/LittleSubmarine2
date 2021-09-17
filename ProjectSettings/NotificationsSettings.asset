@@ -39,11 +39,20 @@
         },
         "DrawableResources": [
             {
-                "Id": "icon_0",
+                "Id": "ls2_icon",
                 "Type": 0,
                 "Asset": {
                     "fileID": 2800000,
                     "guid": "57562c54af86b8541b790f6228e58c1b",
+                    "type": 3
+                }
+            },
+            {
+                "Id": "ls2_large_icon",
+                "Type": 1,
+                "Asset": {
+                    "fileID": 2800000,
+                    "guid": "01a2244a08b06554f824c1f88c300cbd",
                     "type": 3
                 }
             }

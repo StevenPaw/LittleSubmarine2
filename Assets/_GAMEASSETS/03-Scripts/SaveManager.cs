@@ -72,13 +72,12 @@ namespace LittleSubmarine2
         }
         
         public void CheckFileExistance(string filePath, bool isReading = false) {
-            Debug.Log("Checking File! " + filePath);
             if (!File.Exists(filePath)){
                 File.Create(filePath).Close();
                 if (isReading) {
                     Debug.Log("PlayerData is empty! " + filePath);
                     playerData = new PlayerData();
-                    playerData.levelCompleted = new bool[200];
+                    playerData.levelCompleted = new int[200];
                     string dataString = JsonUtility.ToJson(playerData);
                     File.WriteAllText(filePath, dataString);
                 }
@@ -94,13 +93,12 @@ namespace LittleSubmarine2
 
         public PlayerData GetData()
         {
-            Debug.Log("PlayerData: " + playerData.levelCompleted);
             return playerData;
         }
 
-        public void AddCompletedLevel(int world, int level)
+        public void AddCompletedLevel(int world, int level, int stars)
         {
-            playerData.levelCompleted[(world * 9) + level] = true;
+            playerData.levelCompleted[(world * 9) + level] = stars;
             SaveGame();
         }
 
@@ -120,6 +118,11 @@ namespace LittleSubmarine2
         public int GetCoins()
         {
             return playerData.coins;
+        }
+        
+        public void AddCoins(int addedCoins)
+        {
+            playerData.coins += addedCoins;
         }
 
         public bool[] GetBoughtPeriscopes()
@@ -150,6 +153,7 @@ namespace LittleSubmarine2
         {
             playerData.selectedBody = bodyID;
             playerData.selectedPeriscope = periscopeID;
+            SaveGame();
         }
     }
 }

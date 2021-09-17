@@ -1,5 +1,6 @@
 using System;
 using System.IO.MemoryMappedFiles;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -14,22 +15,47 @@ namespace LittleSubmarine2
 
         [SerializeField] private LayerMask WhatStopsMovement;
         [SerializeField] private LayerMask WhatCanBePushed;
-
         [SerializeField] private GameObject playerSpriteGO;
-        private Animator anim;
+        [SerializeField] private SpriteRenderer playerBodySprite;
+        [SerializeField] private SpriteRenderer playerPeriscopeSprite;
+        
         [SerializeField] private bool canMove = true;
+
+        [SerializeField] private TMP_Text moveCounterText;
+        [SerializeField] private int usedMoves;
+        [SerializeField] private DateTime startTime;
         
         private HistoryManager history;
         private SettingsManager settings;
+        private PartManager partManager;
+        private SaveManager saveManager;
         private Vector2 rawAxis;
+        private Animator anim;
+
+        public int UsedMoves => usedMoves;
+        public DateTime StartTime => startTime;
 
         private void Start()
         {
+            //Get references to managers:
+            settings = GameObject.FindGameObjectWithTag(GameTags.SETTINGSMANAGER).GetComponent<SettingsManager>();
+            partManager = GameObject.FindGameObjectWithTag(GameTags.PARTMANAGER).GetComponent<PartManager>();
+            saveManager = GameObject.FindGameObjectWithTag(GameTags.SAVEMANAGER).GetComponent<SaveManager>();
+
+            //Get references to Components:
             anim = playerSpriteGO.GetComponent<Animator>();
+            history = GetComponent<HistoryManager>();
+            
+            //Gets the selected body parts:
+            playerBodySprite.sprite = partManager.GetBodyByID(saveManager.GetData().selectedBody).SpriteImage;
+            playerPeriscopeSprite.sprite = partManager.GetPeriscopeByID(saveManager.GetData().selectedPeriscope).SpriteImage;
+            
+            //Initialize Positions and parents:
             movePoint.parent = null;
             rawAxis = Vector2.zero;
-            history = GetComponent<HistoryManager>();
-            settings = GameObject.FindGameObjectWithTag(GameTags.SETTINGSMANAGER).GetComponent<SettingsManager>();
+            startTime = DateTime.Now;
+            
+            //Update arrow buttons according to settings:
             UpdateArrowButtons();
         }
 
@@ -85,181 +111,190 @@ namespace LittleSubmarine2
         private void Move(MoveDirections direction, bool animateInverted, bool saveHistory)
         {
             
-            if (!animateInverted)
+            if (canMove)
             {
-                //Set Animations
-                switch (direction)
+                if (!animateInverted)
                 {
-                    case MoveDirections.Right:
+                    //Set Animations
+                    switch (direction)
                     {
-                        anim.SetFloat("horizontal", 1f);
-                        anim.SetFloat("vertical", 0f);
-                        break;
+                        case MoveDirections.Right:
+                        {
+                            anim.SetFloat("horizontal", 1f);
+                            anim.SetFloat("vertical", 0f);
+                            break;
+                        }
+                        case MoveDirections.Left:
+                        {
+                            anim.SetFloat("horizontal", -1f);
+                            anim.SetFloat("vertical", 0f);
+                            break;
+                        }
+                        case MoveDirections.Up:
+                        {
+                            anim.SetFloat("horizontal", 0f);
+                            anim.SetFloat("vertical", 1f);
+                            break;
+                        }
+                        case MoveDirections.Down:
+                        {
+                            anim.SetFloat("horizontal", 0f);
+                            anim.SetFloat("vertical", -1f);
+                            break;
+                        }
+                        default:
+                        {
+                            anim.SetFloat("horizontal", 0f);
+                            anim.SetFloat("vertical", 0f);
+                            break;
+                        }
                     }
-                    case MoveDirections.Left:
-                    {
-                        anim.SetFloat("horizontal", -1f);
-                        anim.SetFloat("vertical", 0f);
-                        break;
-                    }
-                    case MoveDirections.Up:
-                    {
-                        anim.SetFloat("horizontal", 0f);
-                        anim.SetFloat("vertical", 1f);
-                        break;
-                    }
-                    case MoveDirections.Down:
-                    {
-                        anim.SetFloat("horizontal", 0f);
-                        anim.SetFloat("vertical", -1f);
-                        break;
-                    }
-                    default:
-                    {
-                        anim.SetFloat("horizontal", 0f);
-                        anim.SetFloat("vertical", 0f);
-                        break;
-                    }
-                }
-            }
-            else
-            {
-                //Set Animations Reversed
-                switch (direction)
-                {
-                    case MoveDirections.Right:
-                    {
-                        anim.SetFloat("horizontal", -1f);
-                        anim.SetFloat("vertical", 0f);
-                        break;
-                    }
-                    case MoveDirections.Left:
-                    {
-                        anim.SetFloat("horizontal", 1f);
-                        anim.SetFloat("vertical", 0f);
-                        break;
-                    }
-                    case MoveDirections.Up:
-                    {
-                        anim.SetFloat("horizontal", 0f);
-                        anim.SetFloat("vertical", -1f);
-                        break;
-                    }
-                    case MoveDirections.Down:
-                    {
-                        anim.SetFloat("horizontal", 0f);
-                        anim.SetFloat("vertical", 1f);
-                        break;
-                    }
-                    default:
-                    {
-                        anim.SetFloat("horizontal", 0f);
-                        anim.SetFloat("vertical", 0f);
-                        break;
-                    }
-                }
-            }
-
-            //RIGHT MOVEMENT
-            if (direction == MoveDirections.Right)
-            {
-                if (Physics2D.OverlapCircle(movePoint.position + new Vector3(1f, 0f),
-                    .2f, WhatStopsMovement))
-                {
-                    //DO NOTHING
-                }
-                else if (Physics2D.OverlapCircle(movePoint.position + new Vector3(1f, 0f), .2f, WhatCanBePushed))
-                {
-                    GameObject pushedObject = Physics2D.OverlapCircle(movePoint.position + new Vector3(1f, 0f), .2f, WhatCanBePushed).gameObject;
-                    PushBlock(pushedObject, Vector2.right);
                 }
                 else
                 {
-                    movePoint.position += new Vector3(1f, 0f);
-                    if (saveHistory)
+                    //Set Animations Reversed
+                    switch (direction)
                     {
-                        history.addMove(MoveTypes.MOVERIGHT);
+                        case MoveDirections.Right:
+                        {
+                            anim.SetFloat("horizontal", -1f);
+                            anim.SetFloat("vertical", 0f);
+                            break;
+                        }
+                        case MoveDirections.Left:
+                        {
+                            anim.SetFloat("horizontal", 1f);
+                            anim.SetFloat("vertical", 0f);
+                            break;
+                        }
+                        case MoveDirections.Up:
+                        {
+                            anim.SetFloat("horizontal", 0f);
+                            anim.SetFloat("vertical", -1f);
+                            break;
+                        }
+                        case MoveDirections.Down:
+                        {
+                            anim.SetFloat("horizontal", 0f);
+                            anim.SetFloat("vertical", 1f);
+                            break;
+                        }
+                        default:
+                        {
+                            anim.SetFloat("horizontal", 0f);
+                            anim.SetFloat("vertical", 0f);
+                            break;
+                        }
+                    }
+                }
+
+                //RIGHT MOVEMENT
+                if (direction == MoveDirections.Right)
+                {
+                    if (Physics2D.OverlapCircle(movePoint.position + new Vector3(1f, 0f),
+                        .2f, WhatStopsMovement))
+                    {
+                        //DO NOTHING
+                    }
+                    else if (Physics2D.OverlapCircle(movePoint.position + new Vector3(1f, 0f), .2f, WhatCanBePushed))
+                    {
+                        GameObject pushedObject = Physics2D.OverlapCircle(movePoint.position + new Vector3(1f, 0f), .2f, WhatCanBePushed).gameObject;
+                        PushBlock(pushedObject, Vector2.right);
+                    }
+                    else
+                    {
+                        movePoint.position += new Vector3(1f, 0f);
+                        usedMoves += 1;
+                        if (saveHistory)
+                        {
+                            history.addMove(MoveTypes.MOVERIGHT);
+                        }
+                    }
+                }
+                //LEFT MOVEMENT
+                else if (direction == MoveDirections.Left)
+                {
+                    if (Physics2D.OverlapCircle(movePoint.position + new Vector3(-1f, 0f), .2f, WhatStopsMovement))
+                    {
+                        //DO NOTHING
+                    }
+                    else if (Physics2D.OverlapCircle(
+                        movePoint.position + new Vector3(-1f, 0f), .2f, WhatCanBePushed))
+                    {
+                        GameObject pushedObject = Physics2D.OverlapCircle(movePoint.position + new Vector3(-1f, 0f), .2f, WhatCanBePushed).gameObject;
+
+                        PushBlock(pushedObject, Vector2.left);
+                    }
+                    else
+                    {
+                        movePoint.position += new Vector3(-1f, 0f);
+                        usedMoves += 1;
+                        if (saveHistory)
+                        {
+                            history.addMove(MoveTypes.MOVELEFT);
+                        }
+                    }
+                }
+
+                //UP MOVEMENT
+                else if (direction == MoveDirections.Up)
+                {
+                    if (Physics2D.OverlapCircle(movePoint.position + new Vector3(0f, 1f), .2f,
+                        WhatStopsMovement))
+                    {
+                        //DO NOTHING
+                    }
+                    else if (Physics2D.OverlapCircle(movePoint.position + new Vector3(0f, 1f),
+                        .2f, WhatCanBePushed))
+                    {
+                        GameObject pushedObject = Physics2D.OverlapCircle(
+                                movePoint.position + new Vector3(0f, 1f), .2f,
+                                WhatCanBePushed)
+                            .gameObject;
+
+                        PushBlock(pushedObject, Vector2.up);
+                    }
+                    else
+                    {
+                        movePoint.position += new Vector3(0f, 1f);
+                        usedMoves += 1;
+                        if (saveHistory)
+                        {
+                            history.addMove(MoveTypes.MOVEUP);
+                        }
+                    }
+                }
+                //DOWN MOVEMENT
+                else if (direction == MoveDirections.Down)
+                {
+                    if (Physics2D.OverlapCircle(movePoint.position + new Vector3(0f, -1f), .2f,
+                        WhatStopsMovement))
+                    {
+                        //DO NOTHING
+                    }
+                    else if (Physics2D.OverlapCircle(movePoint.position + new Vector3(0f, -1f),
+                        .2f, WhatCanBePushed))
+                    {
+                        GameObject pushedObject = Physics2D.OverlapCircle(
+                                movePoint.position + new Vector3(0f, -1f), .2f,
+                                WhatCanBePushed)
+                            .gameObject;
+
+                        PushBlock(pushedObject, Vector2.down);
+                    }
+                    else
+                    {
+                        movePoint.position += new Vector3(0f, -1f);
+                        usedMoves += 1;
+                        if (saveHistory)
+                        {
+                            history.addMove(MoveTypes.MOVEDOWN);
+                        }
                     }
                 }
             }
-            //LEFT MOVEMENT
-            else if (direction == MoveDirections.Left)
-            {
-                if (Physics2D.OverlapCircle(movePoint.position + new Vector3(-1f, 0f), .2f, WhatStopsMovement))
-                {
-                    //DO NOTHING
-                }
-                else if (Physics2D.OverlapCircle(
-                    movePoint.position + new Vector3(-1f, 0f), .2f, WhatCanBePushed))
-                {
-                    GameObject pushedObject = Physics2D.OverlapCircle(movePoint.position + new Vector3(-1f, 0f), .2f, WhatCanBePushed).gameObject;
-
-                    PushBlock(pushedObject, Vector2.left);
-                }
-                else
-                {
-                    movePoint.position += new Vector3(-1f, 0f);
-                    if (saveHistory)
-                    {
-                        history.addMove(MoveTypes.MOVELEFT);
-                    }
-                }
-            }
-
-            //UP MOVEMENT
-            else if (direction == MoveDirections.Up)
-            {
-                if (Physics2D.OverlapCircle(movePoint.position + new Vector3(0f, 1f), .2f,
-                    WhatStopsMovement))
-                {
-                    //DO NOTHING
-                }
-                else if (Physics2D.OverlapCircle(movePoint.position + new Vector3(0f, 1f),
-                    .2f, WhatCanBePushed))
-                {
-                    GameObject pushedObject = Physics2D.OverlapCircle(
-                            movePoint.position + new Vector3(0f, 1f), .2f,
-                            WhatCanBePushed)
-                        .gameObject;
-
-                    PushBlock(pushedObject, Vector2.up);
-                }
-                else
-                {
-                    movePoint.position += new Vector3(0f, 1f);
-                    if (saveHistory)
-                    {
-                        history.addMove(MoveTypes.MOVEUP);
-                    }
-                }
-            }
-            //DOWN MOVEMENT
-            else if (direction == MoveDirections.Down)
-            {
-                if (Physics2D.OverlapCircle(movePoint.position + new Vector3(0f, -1f), .2f,
-                    WhatStopsMovement))
-                {
-                    //DO NOTHING
-                }
-                else if (Physics2D.OverlapCircle(movePoint.position + new Vector3(0f, -1f),
-                    .2f, WhatCanBePushed))
-                {
-                    GameObject pushedObject = Physics2D.OverlapCircle(
-                            movePoint.position + new Vector3(0f, -1f), .2f,
-                            WhatCanBePushed)
-                        .gameObject;
-
-                    PushBlock(pushedObject, Vector2.down);
-                }
-                else
-                {
-                    movePoint.position += new Vector3(0f, -1f);
-                    if (saveHistory)
-                    {
-                        history.addMove(MoveTypes.MOVEDOWN);
-                    }
-                }
-            }
+            
+            moveCounterText.text = usedMoves + " Moves";
         }
 
         private void PushBlock(GameObject blockToPush, Vector2 direction)
@@ -270,21 +305,25 @@ namespace LittleSubmarine2
                 {
                     history.addMove(MoveTypes.PUSHDOWN);
                     movePoint.position += new Vector3(direction.x, direction.y);
+                    usedMoves += 1;
                 }
                 if (direction == Vector2.up)
                 {
                     history.addMove(MoveTypes.PUSHUP);
                     movePoint.position += new Vector3(direction.x, direction.y);
+                    usedMoves += 1;
                 }
                 if (direction == Vector2.left)
                 {
                     history.addMove(MoveTypes.PUSHLEFT);
                     movePoint.position += new Vector3(direction.x, direction.y);
+                    usedMoves += 1;
                 }
                 if (direction == Vector2.right)
                 {
                     history.addMove(MoveTypes.PUSHRIGHT);
                     movePoint.position += new Vector3(direction.x, direction.y);
+                    usedMoves += 1;
                 }
             }
         }
@@ -357,6 +396,12 @@ namespace LittleSubmarine2
                 {
                     break;
                 }
+            }
+
+            if (usedMoves != 0)
+            {
+                usedMoves -= 2;
+                moveCounterText.text = usedMoves + " Moves";
             }
         }
 
@@ -432,10 +477,10 @@ namespace LittleSubmarine2
                 rawAxis = ctx.ReadValue<Vector2>();
             }
         }
-
-        public void BTN_Pause(InputAction.CallbackContext ctx)
+        
+        public void OnEscape(InputAction.CallbackContext ctx)
         {
-            //pauseMenu.PauseGame();
+            BTN_BackToMenu();
         }
 
         public void OnSwipeDetected (Swipe direction, Vector2 swipeVelocity)

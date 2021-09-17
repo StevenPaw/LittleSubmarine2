@@ -1,6 +1,7 @@
 ﻿using TMPro;
 using Unity.Collections;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -20,9 +21,8 @@ namespace LittleSubmarine2
         [SerializeField] private GameObject bodyLock;
         [SerializeField] private TMP_Text bodyPrice;
         [SerializeField] private Button saveButton;
+        [SerializeField] private TMP_Text saveButtonText;
 
-        [SerializeField] private GameObject periscopeList;
-        [SerializeField] private GameObject bodyList;
         [SerializeField] private TMP_Text moneyText;
         [SerializeField] private int activePeriscope;
         [SerializeField] private int activeBody;
@@ -43,13 +43,19 @@ namespace LittleSubmarine2
         [ReadOnly] [SerializeField] private SubmarinePart[] bodies;
 
         private SaveManager saveManager;
+        private PartManager partManager;
 
         private void Start()
         {
             saveManager = GameObject.FindGameObjectWithTag(GameTags.SAVEMANAGER).GetComponent<SaveManager>();
+            partManager = GameObject.FindGameObjectWithTag(GameTags.PARTMANAGER).GetComponent<PartManager>();
             buyPanel.SetActive(false);
             periscopes = new SubmarinePart[200];
             bodies = new SubmarinePart[200];
+
+            activeBody = saveManager.GetData().selectedBody;
+            activePeriscope = saveManager.GetData().selectedPeriscope;
+            
             GetBoughtItems();
             InitializeParts();
             UpdateSelectedParts();
@@ -58,7 +64,7 @@ namespace LittleSubmarine2
         private void InitializeParts()
         {
             bodyAmount = 0;
-            foreach (SubmarinePart sp in periscopeList.GetComponentsInChildren<SubmarinePart>())
+            foreach (SubmarinePart sp in partManager.GetPartsList(SubmarinePartType.PERISCOPE))
             {
                 periscopes[sp.ID] = sp;
                 if (sp.ID > periscopeAmount)
@@ -68,7 +74,7 @@ namespace LittleSubmarine2
             }
 
             bodyAmount = 0;
-            foreach (SubmarinePart sp in bodyList.GetComponentsInChildren<SubmarinePart>())
+            foreach (SubmarinePart sp in partManager.GetPartsList(SubmarinePartType.BODY))
             {
                 bodies[sp.ID] = sp;
                 if (sp.ID > bodyAmount)
@@ -81,7 +87,8 @@ namespace LittleSubmarine2
         private void GetBoughtItems()
         {
             periscopesBought = saveManager.GetBoughtPeriscopes();
-            periscopesBought = saveManager.GetBoughtBodies();
+            bodiesBought = saveManager.GetBoughtBodies();
+            moneyText.text = saveManager.GetCoins().ToString();
         }
 
         private void UpdateSelectedParts()
@@ -91,11 +98,14 @@ namespace LittleSubmarine2
             smallSubmarinePeriscopeImage.sprite = periscopes[activePeriscope].SpriteImage;
             smallSubmarineBodyImage.sprite = bodies[activeBody].SpriteImage;
 
+            descriptionText.text = periscopes[activePeriscope].Description + " " + bodies[activeBody].Description;
+            moneyText.text = saveManager.GetCoins().ToString();
+
             bool isSelectable = true;
             if (!periscopesBought[activePeriscope] && periscopes[activePeriscope].Cost != 0)
             {
                 isSelectable = false;
-                submarinePeriscopeImage.color = Color.black;
+                submarinePeriscopeImage.color = new Color(1f,1f,1f,0.5f);
                 periscopeLock.SetActive(true);
                 periscopePrice.text = periscopes[activePeriscope].Cost + "G";
             }
@@ -106,11 +116,10 @@ namespace LittleSubmarine2
                 periscopePrice.text = "";
             }
             
-            Debug.Log("Active Body:" + activeBody);
             if (!bodiesBought[activeBody] && bodies[activeBody].Cost != 0)
             {
                 isSelectable = false;
-                submarineBodyImage.color = Color.black;
+                submarineBodyImage.color = new Color(1f,1f,1f,0.5f);
                 bodyLock.SetActive(true);
                 bodyPrice.text = bodies[activeBody].Cost + "G";
             }
@@ -128,11 +137,20 @@ namespace LittleSubmarine2
 
             if (isSelectable)
             {
-                saveButton.enabled = true;
+                saveButton.interactable = true;
+                saveButtonText.text = "Save Submarine";
             }
             else
             {
-                saveButton.enabled = false;
+                if (saveManager.GetData().selectedBody == activeBody && saveManager.GetData().selectedPeriscope == activePeriscope)
+                {
+                    saveButtonText.text = "Already selected!";
+                }
+                else
+                {
+                    saveButtonText.text = "Not bought parts!";
+                }
+                saveButton.interactable = false;
             }
         }
 
@@ -141,19 +159,17 @@ namespace LittleSubmarine2
             buyPanel.SetActive(true);
             buyPanelType = buyTypeIn;
             
-            
-
             switch (buyPanelType)
             {
                 case SubmarinePartType.BODY:
                     buyPanelImage.sprite = bodies[activeBody].SpriteImage;
                     buyPanelText.text = "Buy '" + bodies[activeBody].Description + "' for " + bodies[activeBody].Cost + "G ?";
-                    buyPanelAcceptButton.enabled = saveManager.GetCoins() >= bodies[activeBody].Cost;
+                    buyPanelAcceptButton.interactable = saveManager.GetCoins() >= bodies[activeBody].Cost;
                     break;
                 case SubmarinePartType.PERISCOPE:
                     buyPanelImage.sprite = periscopes[activePeriscope].SpriteImage;
                     buyPanelText.text = "Buy '" + periscopes[activePeriscope].Description + "' for " + periscopes[activePeriscope].Cost + "G ?";
-                    buyPanelAcceptButton.enabled = saveManager.GetCoins() >= periscopes[activePeriscope].Cost;
+                    buyPanelAcceptButton.interactable = saveManager.GetCoins() >= periscopes[activePeriscope].Cost;
                     break;
             }
         }
@@ -169,6 +185,8 @@ namespace LittleSubmarine2
                     saveManager.BuyPeriscope(activePeriscope, periscopes[activePeriscope].Cost);
                     break;
             }
+            UpdateSelectedParts();
+            buyPanel.SetActive(false);
         }
 
         public void BTN_NextPeriscope()
@@ -246,17 +264,24 @@ namespace LittleSubmarine2
         public void BTN_SaveSubmarine()
         {
             saveManager.SelectSubmarine(activePeriscope, activeBody);
+            UpdateSelectedParts();
         }
 
         public void BTN_BuyCoins()
         {
             //WIP: Need to buy coins here
             Debug.Log("WIP!!! Buy Coins!");
+            UpdateSelectedParts();
         }
 
         public void BTN_BackToLevels()
         {
             SceneManager.LoadScene(Scenes.LEVELOVERVIEW);
+        }
+        
+        public void OnEscape(InputAction.CallbackContext ctx)
+        {
+            BTN_BackToLevels();
         }
     }
 }

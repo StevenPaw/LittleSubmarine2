@@ -2,8 +2,8 @@
     "m_SelectedDeviceId": "WCR7N19111009715",
     "m_SelectedPackage": {
         "deviceId": "WCR7N19111009715",
-        "name": "com.StevenPaw.LittleSubmarine2",
-        "processId": 22933,
+        "name": "com.LunaSnailStudios.LittleSubmarine2",
+        "processId": 21860,
         "exited": false
     },
     "m_SelectedPriority": 0,
@@ -132,6 +132,48 @@
             "deviceId": "WCR7N19111009715",
             "name": "com.StevenPaw.LittleSubmarine2",
             "processId": 22933,
+            "exited": false
+        },
+        {
+            "deviceId": "WCR7N19111009715",
+            "name": "com.StevenPaw.LittleSubmarine2",
+            "processId": 31011,
+            "exited": false
+        },
+        {
+            "deviceId": "WCR7N19111009715",
+            "name": "com.StevenPaw.LittleSubmarine2",
+            "processId": 7962,
+            "exited": false
+        },
+        {
+            "deviceId": "WCR7N19111009715",
+            "name": "com.StevenPaw.LittleSubmarine2",
+            "processId": 9363,
+            "exited": false
+        },
+        {
+            "deviceId": "WCR7N19111009715",
+            "name": "com.StevenPaw.LittleSubmarine2",
+            "processId": 9808,
+            "exited": false
+        },
+        {
+            "deviceId": "WCR7N19111009715",
+            "name": "com.LunaSnailStudios.LittleSubmarine2",
+            "processId": 11308,
+            "exited": false
+        },
+        {
+            "deviceId": "WCR7N19111009715",
+            "name": "com.LunaSnailStudios.LittleSubmarine2",
+            "processId": 19922,
+            "exited": false
+        },
+        {
+            "deviceId": "WCR7N19111009715",
+            "name": "com.LunaSnailStudios.LittleSubmarine2",
+            "processId": 21860,
             "exited": false
         }
     ],
