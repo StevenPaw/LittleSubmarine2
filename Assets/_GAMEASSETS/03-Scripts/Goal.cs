@@ -78,7 +78,11 @@ namespace LittleSubmarine2
                     earnedStars += 1;
                 }
                 
+                Debug.Log("Earned Stars: " + earnedStars);
+                
                 int newEarnedStars = earnedStars - saveManager.GetData().levelCompleted[(world * 9) + level];
+                
+                Debug.Log("new Earned Stars: " + newEarnedStars);
                 
                 if (newEarnedStars == 0)
                 {
@@ -87,6 +91,7 @@ namespace LittleSubmarine2
                 else
                 {
                     addedCoinsGO.SetActive(true);
+                    coinsAmountText.text = "+ " + coinsPerStar * newEarnedStars;
                     saveManager.AddCoins(coinsPerStar * newEarnedStars);
                     saveManager.AddCompletedLevel(world, level, earnedStars);
                 }
