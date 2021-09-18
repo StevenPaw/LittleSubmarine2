@@ -26618,6 +26618,14 @@ PrefabInstance:
       propertyPath: nextLevel
       value: Level0-3
       objectReference: {fileID: 0}
+    - target: {fileID: 2701348644376252552, guid: 9837b7f223c48664cb72b36a7174dd1a, type: 3}
+      propertyPath: maxMovesForStar2
+      value: 65
+      objectReference: {fileID: 0}
+    - target: {fileID: 2701348644376252552, guid: 9837b7f223c48664cb72b36a7174dd1a, type: 3}
+      propertyPath: maxMovesForStar3
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 2701348644667173038, guid: 9837b7f223c48664cb72b36a7174dd1a, type: 3}
       propertyPath: m_Camera
       value: 

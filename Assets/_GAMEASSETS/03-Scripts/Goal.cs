@@ -84,7 +84,7 @@ namespace LittleSubmarine2
                 
                 Debug.Log("new Earned Stars: " + newEarnedStars);
                 
-                if (newEarnedStars == 0)
+                if (newEarnedStars <= 0)
                 {
                     addedCoinsGO.SetActive(false);
                 }

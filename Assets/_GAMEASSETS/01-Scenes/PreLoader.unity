@@ -433,19 +433,39 @@ MonoBehaviour:
     description: Standard
   - type: 1
     id: 1
-    cost: 10
+    cost: 20
     spriteImage: {fileID: 21300000, guid: dab8f417a48c0f64c96af456db82475c, type: 3}
     description: Green
   - type: 1
     id: 2
+    cost: 20
+    spriteImage: {fileID: 21300000, guid: 9d1f4e453e52eae4487c0c534dad5dcd, type: 3}
+    description: Yellow
+  - type: 1
+    id: 3
+    cost: 20
+    spriteImage: {fileID: 21300000, guid: 939ad0945b3106442a846ae3e62b2793, type: 3}
+    description: Blue
+  - type: 1
+    id: 4
     cost: 25
     spriteImage: {fileID: 21300000, guid: 9fb3119178cfda84bb8ef8f172aa01bb, type: 3}
     description: Dead
   - type: 1
-    id: 3
+    id: 5
     cost: 150
     spriteImage: {fileID: 21300000, guid: 06aed3b9b03594e4594545433774797a, type: 3}
     description: Foxy
+  - type: 1
+    id: 6
+    cost: 150
+    spriteImage: {fileID: 21300000, guid: db450d2cb62aefa46b7ba9f16e8262e7, type: 3}
+    description: Moss
+  - type: 1
+    id: 7
+    cost: 200
+    spriteImage: {fileID: 21300000, guid: 0ce44fc3e0861124287e1f4fd94d803b, type: 3}
+    description: UFO
   periscopeParts:
   - type: 0
     id: 0
@@ -466,7 +486,17 @@ MonoBehaviour:
     id: 3
     cost: 100
     spriteImage: {fileID: 21300000, guid: d48d43344816d8a4f9097581d82507c0, type: 3}
-    description: sherrif
+    description: western
+  - type: 0
+    id: 4
+    cost: 150
+    spriteImage: {fileID: 21300000, guid: 57afdff7aa970f94b825c734d42ffdc4, type: 3}
+    description: weaponized
+  - type: 0
+    id: 5
+    cost: 200
+    spriteImage: {fileID: 21300000, guid: 85bec4679ac5ec940bb94432c756e2d5, type: 3}
+    description: enlightened
 --- !u!4 &859415982
 Transform:
   m_ObjectHideFlags: 0

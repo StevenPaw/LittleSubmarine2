@@ -133,7 +133,7 @@ MonoBehaviour:
   movePoint: {fileID: 9105687628651517243}
   WhatStopsMovement:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 72
   moveSpeed: 5
   canMoveOtherBlocks: 0
   WhatCanBeMoved:

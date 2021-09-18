@@ -11,7 +11,7 @@ namespace LittleSubmarine2
     [SerializeField] private LayerMask WhatStopsMovement;
     [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private bool canMoveOtherBlocks = false;
-    [SerializeField] private LayerMask WhatCanBeMoved;
+    public LayerMask WhatCanBeMoved;
     [SerializeField] private PushableTypes blockType;
     
     private HistoryManager history;
@@ -55,11 +55,11 @@ namespace LittleSubmarine2
         //RIGHT MOVEMENT
         if (moveDirection == Vector2.right)
         {
-            if (Physics2D.OverlapCircle(movePoint.position + new Vector3(.5f, 0f), .2f, WhatStopsMovement))
+            if (Physics2D.OverlapCircle(movePoint.position + new Vector3(1f, 0f), .2f, WhatStopsMovement))
             {
                 //DO NOTHING
             }
-            else if (Physics2D.OverlapCircle(movePoint.position + new Vector3(.5f, 0f), .2f, WhatCanBeMoved))
+            else if (Physics2D.OverlapCircle(movePoint.position + new Vector3(1f, 0f), .2f, WhatCanBeMoved))
             {
                 if (canMoveOtherBlocks)
                 {
@@ -79,11 +79,11 @@ namespace LittleSubmarine2
         //LEFT MOVEMENT
         else if (moveDirection == Vector2.left)
         {
-            if (Physics2D.OverlapCircle(movePoint.position + new Vector3(-.5f, 0f), .2f, WhatStopsMovement))
+            if (Physics2D.OverlapCircle(movePoint.position + new Vector3(-1f, 0f), .2f, WhatStopsMovement))
             {
                 //DO NOTHING
             }
-            else if (Physics2D.OverlapCircle(movePoint.position + new Vector3(-.5f, 0f), .2f, WhatCanBeMoved))
+            else if (Physics2D.OverlapCircle(movePoint.position + new Vector3(-1f, 0f), .2f, WhatCanBeMoved))
             {
                 if (canMoveOtherBlocks)
                 {
@@ -104,11 +104,11 @@ namespace LittleSubmarine2
         //UP MOVEMENT
         else if (moveDirection == Vector2.up)
         {
-            if (Physics2D.OverlapCircle(movePoint.position + new Vector3(0f, .5f), .2f, WhatStopsMovement))
+            if (Physics2D.OverlapCircle(movePoint.position + new Vector3(0f, 1f), .2f, WhatStopsMovement))
             {
                 
             }
-            else if (Physics2D.OverlapCircle(movePoint.position + new Vector3(0f, .5f), .2f, WhatCanBeMoved))
+            else if (Physics2D.OverlapCircle(movePoint.position + new Vector3(0f, 1f), .2f, WhatCanBeMoved))
             {
                 if (canMoveOtherBlocks)
                 {
@@ -128,11 +128,11 @@ namespace LittleSubmarine2
         //DOWN MOVEMENT
         else if (moveDirection == Vector2.down)
         {
-            if (Physics2D.OverlapCircle(movePoint.position + new Vector3(0f, -.5f), .2f, WhatStopsMovement))
+            if (Physics2D.OverlapCircle(movePoint.position + new Vector3(0f, -1f), .2f, WhatStopsMovement))
             {
                 //DO NOTHING
             }
-            else if (Physics2D.OverlapCircle(movePoint.position + new Vector3(0f, -.5f), .2f, WhatCanBeMoved))
+            else if (Physics2D.OverlapCircle(movePoint.position + new Vector3(0f, -1f), .2f, WhatCanBeMoved))
             {
                 if (canMoveOtherBlocks)
                 {

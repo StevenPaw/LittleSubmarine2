@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8603629041619941274}
   - component: {fileID: 8603629041619941272}
   - component: {fileID: 8603629041619941254}
+  - component: {fileID: 8148824153323162133}
   m_Layer: 6
   m_Name: BlackFish
   m_TagString: Untagged
@@ -50,7 +51,7 @@ MonoBehaviour:
   movePoint: {fileID: 8603629041960400645}
   WhatStopsMovement:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 72
   moveSpeed: 5
   canMoveOtherBlocks: 0
   WhatCanBeMoved:
@@ -96,6 +97,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moves: 
+--- !u!50 &8148824153323162133
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8603629041619941277}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &8603629041960400644
 GameObject:
   m_ObjectHideFlags: 0

@@ -271,6 +271,7 @@ namespace LittleSubmarine2
         {
             //WIP: Need to buy coins here
             Debug.Log("WIP!!! Buy Coins!");
+            saveManager.AddCoins(10);
             UpdateSelectedParts();
         }
 
