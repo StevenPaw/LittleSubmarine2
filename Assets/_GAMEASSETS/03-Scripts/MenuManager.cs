@@ -16,9 +16,11 @@ namespace LittleSubmarine2
         [SerializeField] private string levelOverviewScene;
         [SerializeField] private string tutorialLevel;
 
+        [SerializeField] private GameObject DeleteSavesPrompt;
+
         [SerializeField] private Image submarineBody;
         [SerializeField] private Image submarinePeriscope;
-        
+
         private SaveManager saveManager;
         private PartManager partManager;
 
@@ -64,9 +66,23 @@ namespace LittleSubmarine2
             }
         }
 
+        public void BTN_LoadTutorial()
+        {
+            SceneManager.LoadScene(Scenes.TUTORIAL);
+        }
+
+        public void BTN_DeleteSaves()
+        {
+            DeleteSavesPrompt.SetActive(true);
+        }
+        
         public void ClearSaves()
         {
             saveManager.ClearSave();
+            
+            //Try restarting the game:
+            System.Diagnostics.Process.Start(Application.dataPath.Replace("_Data", ".exe")); //new program
+            Application.Quit(); //kill current process
         }
 
         public void CloseGame()
