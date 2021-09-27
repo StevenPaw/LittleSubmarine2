@@ -3,7 +3,7 @@
     "m_SelectedPackage": {
         "deviceId": "WCR7N19111009715",
         "name": "com.LunaSnailStudios.LittleSubmarine2",
-        "processId": 17482,
+        "processId": 12076,
         "exited": false
     },
     "m_SelectedPriority": 0,
@@ -180,6 +180,12 @@
             "deviceId": "WCR7N19111009715",
             "name": "com.LunaSnailStudios.LittleSubmarine2",
             "processId": 17482,
+            "exited": false
+        },
+        {
+            "deviceId": "WCR7N19111009715",
+            "name": "com.LunaSnailStudios.LittleSubmarine2",
+            "processId": 12076,
             "exited": false
         }
     ],
