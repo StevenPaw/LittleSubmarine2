@@ -79,7 +79,9 @@ namespace LittleSubmarine2
         public void ClearSaves()
         {
             saveManager.ClearSave();
-            
+            DeleteSavesPrompt.SetActive(false);
+            Debug.Log("Restarting Game!");
+
             //Try restarting the game:
             System.Diagnostics.Process.Start(Application.dataPath.Replace("_Data", ".exe")); //new program
             Application.Quit(); //kill current process

@@ -35120,7 +35120,7 @@ PrefabInstance:
       objectReference: {fileID: 982888359}
     - target: {fileID: 3284748267667863674, guid: e0721c38630a35440b65934c0a9b54b4, type: 3}
       propertyPath: m_text
-      value: Level 0-6
+      value: Level 0-8
       objectReference: {fileID: 0}
     - target: {fileID: 4268733887684374353, guid: e0721c38630a35440b65934c0a9b54b4, type: 3}
       propertyPath: m_SortingLayer
