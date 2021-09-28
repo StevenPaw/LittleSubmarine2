@@ -466,6 +466,16 @@ MonoBehaviour:
     cost: 200
     spriteImage: {fileID: 21300000, guid: 0ce44fc3e0861124287e1f4fd94d803b, type: 3}
     description: UFO
+  - type: 1
+    id: 8
+    cost: 200
+    spriteImage: {fileID: 21300000, guid: 6045f7a7b098a42459f12deb5a18aa4c, type: 3}
+    description: Okto
+  - type: 1
+    id: 9
+    cost: 200
+    spriteImage: {fileID: 21300000, guid: b1a510064ac8d6342a055745a7c896f4, type: 3}
+    description: Nemo
   periscopeParts:
   - type: 0
     id: 0

@@ -22,6 +22,29 @@ namespace LittleSubmarine2
         {
             saveManager = GameObject.FindGameObjectWithTag(GameTags.SAVEMANAGER).GetComponent<SaveManager>();
             moneyText.text = saveManager.GetCoins().ToString();
+            int completedLevelCount = 0;
+            int completedWorlds = 0;
+            foreach (int levelStars in saveManager.GetData().levelCompleted)
+            {
+                Debug.Log("levelStars = " + levelStars);
+                if (levelStars > 0)
+                {
+                    completedLevelCount += 1;
+                }
+
+                if (completedLevelCount == 9)
+                {
+                    completedWorlds += 1;
+                    completedLevelCount = 0;
+                }
+            }
+            
+            Debug.Log("Completed Worlds: " + completedWorlds);
+
+            if (completedWorlds < worldPanels.Length - 1 && completedWorlds > 0)
+            {
+                activeWorld = completedWorlds;
+            }
             UpdateWorldVisibility();
         }
 
