@@ -24,13 +24,15 @@ namespace LittleSubmarine2
         [SerializeField] private TMP_Text moveCounterText;
         [SerializeField] private int usedMoves;
         [SerializeField] private DateTime startTime;
-        
+
         private HistoryManager history;
         private SettingsManager settings;
         private PartManager partManager;
         private SaveManager saveManager;
         private Vector2 rawAxis;
         private Animator anim;
+
+        private MoveDirections buttonHoldingDirection;
 
         public int UsedMoves => usedMoves;
         public DateTime StartTime => startTime;
@@ -417,6 +419,43 @@ namespace LittleSubmarine2
             }
         }
 
+        public void BTN_DirectionUpHold()
+        {
+            if (canMove)
+            {
+                rawAxis = new Vector2(0, 1);
+            }
+        }
+        
+        public void BTN_DirectionDownHold()
+        {
+            if (canMove)
+            {
+                rawAxis = new Vector2(0, -1);
+            }
+        }
+        
+        public void BTN_DirectionLeftHold()
+        {
+            if (canMove)
+            {
+                rawAxis = new Vector2(-1, 0);
+            }
+        }
+        
+        public void BTN_DirectionRightHold()
+        {
+            if (canMove)
+            {
+                rawAxis = new Vector2(1, 0);
+            }
+        }
+
+        public void BTN_DirectionRelease()
+        {
+            rawAxis = Vector2.zero;
+        }
+
         public void BTN_Up()
         {
             if (canMove)
@@ -508,6 +547,7 @@ namespace LittleSubmarine2
             Left,
             Up,
             Down,
+            None,
             Pause
         }
     }

@@ -3,189 +3,69 @@
     "m_SelectedPackage": {
         "deviceId": "WCR7N19111009715",
         "name": "com.LunaSnailStudios.LittleSubmarine2",
-        "processId": 12076,
+        "processId": 23808,
         "exited": false
     },
     "m_SelectedPriority": 0,
     "m_KnownPackagesForSerialization": [
         {
             "deviceId": "WCR7N19111009715",
-            "name": "com.DefaultCompany.com.unity.template.mobile2D",
-            "processId": 30112,
-            "exited": false
-        },
-        {
-            "deviceId": "WCR7N19111009715",
-            "name": "com.DefaultCompany.com.unity.template.mobile2D",
-            "processId": 12804,
-            "exited": false
-        },
-        {
-            "deviceId": "WCR7N19111009715",
-            "name": "com.DefaultCompany.com.unity.template.mobile2D",
-            "processId": 14302,
-            "exited": false
-        },
-        {
-            "deviceId": "WCR7N19111009715",
-            "name": "com.DefaultCompany.com.unity.template.mobile2D",
-            "processId": 19586,
-            "exited": false
-        },
-        {
-            "deviceId": "WCR7N19111009715",
-            "name": "com.DefaultCompany.com.unity.template.mobile2D",
-            "processId": 17351,
-            "exited": false
-        },
-        {
-            "deviceId": "WCR7N19111009715",
-            "name": "com.DefaultCompany.com.unity.template.mobile2D",
-            "processId": 18600,
-            "exited": false
-        },
-        {
-            "deviceId": "WCR7N19111009715",
-            "name": "com.DefaultCompany.com.unity.template.mobile2D",
-            "processId": 19930,
-            "exited": false
-        },
-        {
-            "deviceId": "WCR7N19111009715",
-            "name": "com.DefaultCompany.com.unity.template.mobile2D",
-            "processId": 30409,
-            "exited": false
-        },
-        {
-            "deviceId": "WCR7N19111009715",
-            "name": "com.DefaultCompany.com.unity.template.mobile2D",
-            "processId": 3951,
-            "exited": false
-        },
-        {
-            "deviceId": "WCR7N19111009715",
-            "name": "com.DefaultCompany.com.unity.template.mobile2D",
-            "processId": 9041,
-            "exited": false
-        },
-        {
-            "deviceId": "WCR7N19111009715",
-            "name": "com.DefaultCompany.com.unity.template.mobile2D",
-            "processId": 10407,
-            "exited": false
-        },
-        {
-            "deviceId": "WCR7N19111009715",
-            "name": "com.DefaultCompany.com.unity.template.mobile2D",
-            "processId": 15016,
-            "exited": false
-        },
-        {
-            "deviceId": "WCR7N19111009715",
-            "name": "com.DefaultCompany.com.unity.template.mobile2D",
-            "processId": 15611,
-            "exited": false
-        },
-        {
-            "deviceId": "WCR7N19111009715",
-            "name": "com.DefaultCompany.com.unity.template.mobile2D",
-            "processId": 5816,
-            "exited": false
-        },
-        {
-            "deviceId": "WCR7N19111009715",
-            "name": "com.DefaultCompany.com.unity.template.mobile2D",
-            "processId": 8960,
-            "exited": false
-        },
-        {
-            "deviceId": "WCR7N19111009715",
-            "name": "com.DefaultCompany.com.unity.template.mobile2D",
-            "processId": 25450,
-            "exited": false
-        },
-        {
-            "deviceId": "WCR7N19111009715",
-            "name": "com.DefaultCompany.com.unity.template.mobile2D",
-            "processId": 21834,
-            "exited": false
-        },
-        {
-            "deviceId": "WCR7N19111009715",
-            "name": "com.StevenPaw.LittleSubmarine2",
-            "processId": 2573,
-            "exited": false
-        },
-        {
-            "deviceId": "WCR7N19111009715",
-            "name": "com.StevenPaw.LittleSubmarine2",
-            "processId": 3178,
-            "exited": false
-        },
-        {
-            "deviceId": "WCR7N19111009715",
-            "name": "com.StevenPaw.LittleSubmarine2",
-            "processId": 3493,
-            "exited": false
-        },
-        {
-            "deviceId": "WCR7N19111009715",
-            "name": "com.StevenPaw.LittleSubmarine2",
-            "processId": 22933,
-            "exited": false
-        },
-        {
-            "deviceId": "WCR7N19111009715",
-            "name": "com.StevenPaw.LittleSubmarine2",
-            "processId": 31011,
-            "exited": false
-        },
-        {
-            "deviceId": "WCR7N19111009715",
-            "name": "com.StevenPaw.LittleSubmarine2",
-            "processId": 7962,
-            "exited": false
-        },
-        {
-            "deviceId": "WCR7N19111009715",
-            "name": "com.StevenPaw.LittleSubmarine2",
-            "processId": 9363,
-            "exited": false
-        },
-        {
-            "deviceId": "WCR7N19111009715",
-            "name": "com.StevenPaw.LittleSubmarine2",
-            "processId": 9808,
-            "exited": false
-        },
-        {
-            "deviceId": "WCR7N19111009715",
-            "name": "com.LunaSnailStudios.LittleSubmarine2",
-            "processId": 11308,
-            "exited": false
-        },
-        {
-            "deviceId": "WCR7N19111009715",
-            "name": "com.LunaSnailStudios.LittleSubmarine2",
-            "processId": 19922,
-            "exited": false
-        },
-        {
-            "deviceId": "WCR7N19111009715",
-            "name": "com.LunaSnailStudios.LittleSubmarine2",
-            "processId": 21860,
-            "exited": false
-        },
-        {
-            "deviceId": "WCR7N19111009715",
             "name": "com.LunaSnailStudios.LittleSubmarine2",
             "processId": 17482,
-            "exited": false
+            "exited": true
         },
         {
             "deviceId": "WCR7N19111009715",
             "name": "com.LunaSnailStudios.LittleSubmarine2",
             "processId": 12076,
+            "exited": true
+        },
+        {
+            "deviceId": "WCR7N19111009715",
+            "name": "com.LunaSnailStudios.LittleSubmarine2",
+            "processId": 15684,
+            "exited": true
+        },
+        {
+            "deviceId": "WCR7N19111009715",
+            "name": "com.LunaSnailStudios.LittleSubmarine2",
+            "processId": 17583,
+            "exited": true
+        },
+        {
+            "deviceId": "WCR7N19111009715",
+            "name": "com.LunaSnailStudios.LittleSubmarine2",
+            "processId": 18071,
+            "exited": true
+        },
+        {
+            "deviceId": "WCR7N19111009715",
+            "name": "com.whatsapp.w4b",
+            "processId": 25066,
+            "exited": false
+        },
+        {
+            "deviceId": "WCR7N19111009715",
+            "name": "com.LunaSnailStudios.LittleSubmarine2",
+            "processId": 21181,
+            "exited": false
+        },
+        {
+            "deviceId": "WCR7N19111009715",
+            "name": "com.LunaSnailStudios.LittleSubmarine2",
+            "processId": 22393,
+            "exited": false
+        },
+        {
+            "deviceId": "WCR7N19111009715",
+            "name": "com.LunaSnailStudios.LittleSubmarine2",
+            "processId": 22876,
+            "exited": false
+        },
+        {
+            "deviceId": "WCR7N19111009715",
+            "name": "com.LunaSnailStudios.LittleSubmarine2",
+            "processId": 23808,
             "exited": false
         }
     ],
