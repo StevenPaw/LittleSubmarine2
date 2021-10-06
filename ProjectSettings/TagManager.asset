@@ -10,6 +10,7 @@ TagManager:
   - SettingsManager
   - PartManager
   - NotificationManager
+  - SpecialTile
   layers:
   - Default
   - TransparentFX
