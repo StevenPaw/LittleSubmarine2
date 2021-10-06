@@ -112,9 +112,29 @@ namespace LittleSubmarine2
 
         private void Move(MoveDirections direction, bool animateInverted, bool saveHistory)
         {
-            
+            Vector2 directionToMove;
             if (canMove)
             {
+
+                switch (direction)
+                {
+                    default:
+                        directionToMove = Vector2.zero;
+                        break;
+                    case MoveDirections.Right:
+                        directionToMove = Vector2.right;
+                        break;
+                    case MoveDirections.Left:
+                        directionToMove = Vector2.left;
+                        break;
+                    case MoveDirections.Up:
+                        directionToMove = Vector2.up;
+                        break;
+                    case MoveDirections.Down:
+                        directionToMove = Vector2.down;
+                        break;
+                }
+                
                 if (!animateInverted)
                 {
                     //Set Animations
@@ -249,10 +269,7 @@ namespace LittleSubmarine2
                     else if (Physics2D.OverlapCircle(movePoint.position + new Vector3(0f, 1f),
                         .2f, WhatCanBePushed))
                     {
-                        GameObject pushedObject = Physics2D.OverlapCircle(
-                                movePoint.position + new Vector3(0f, 1f), .2f,
-                                WhatCanBePushed)
-                            .gameObject;
+                        GameObject pushedObject = Physics2D.OverlapCircle(movePoint.position + new Vector3(0f, 1f), .2f, WhatCanBePushed).gameObject;
 
                         PushBlock(pushedObject, Vector2.up);
                     }
