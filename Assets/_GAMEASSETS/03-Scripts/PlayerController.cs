@@ -162,14 +162,10 @@ namespace LittleSubmarine2
                 else if(Physics2D.OverlapCircle(movePoint.position + new Vector3(directionToMove.x,directionToMove.y), .2f, SpecialTiles))
                 {
                     SpecialTile tile = Physics2D.OverlapCircle(movePoint.position + new Vector3(directionToMove.x, directionToMove.y), .2f, SpecialTiles).GetComponent<SpecialTile>();
-                    if (CanUseSpecialTile(tile, directionToMove))
+                    if (CanUseSpecialTile(tile, directionToMove, moveType, saveHistory))
                     {
                         movePoint.position += new Vector3(directionToMove.x,directionToMove.y);
                         usedMoves += 1;
-                        if (saveHistory)
-                        {
-                            history.addMove(moveType);
-                        }
                     }
                 }
                 else
@@ -186,18 +182,27 @@ namespace LittleSubmarine2
             moveCounterText.text = usedMoves + " Moves";
         }
 
-        private bool CanUseSpecialTile(SpecialTile tileIn, Vector2 direction)
+        private bool CanUseSpecialTile(SpecialTile tileIn, Vector2 direction, MoveTypes moveType, bool saveHistory)
         {
             switch (tileIn.GetTileType())
             {
                 default:
                     return true;
+                    history.addMove(moveType);
                 case SpecialTileTypes.ONEWAY:
                     Oneway ow = tileIn.GetComponent<Oneway>();
+                    history.addMove(moveType);
                     return direction == ow.GetDirection();
                 case SpecialTileTypes.PUSHABLE:
                     GameObject pushedObject = tileIn.gameObject;
-                    return PushBlock(pushedObject, direction);
+                    if (PushBlock(pushedObject, direction))
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
             }
         }
 
@@ -208,26 +213,18 @@ namespace LittleSubmarine2
                 if (direction == Vector2.down)
                 {
                     history.addMove(MoveTypes.PUSHDOWN);
-                    //movePoint.position += new Vector3(direction.x, direction.y);
-                    usedMoves += 1;
                 }
                 if (direction == Vector2.up)
                 {
                     history.addMove(MoveTypes.PUSHUP);
-                    //movePoint.position += new Vector3(direction.x, direction.y);
-                    usedMoves += 1;
                 }
                 if (direction == Vector2.left)
                 {
                     history.addMove(MoveTypes.PUSHLEFT);
-                    //movePoint.position += new Vector3(direction.x, direction.y);
-                    usedMoves += 1;
                 }
                 if (direction == Vector2.right)
                 {
                     history.addMove(MoveTypes.PUSHRIGHT);
-                    //movePoint.position += new Vector3(direction.x, direction.y);
-                    usedMoves += 1;
                 }
 
                 return true;
@@ -272,7 +269,7 @@ namespace LittleSubmarine2
                 
                 case MoveTypes.PUSHUP:
                 {
-                    GameObject pushedObject = Physics2D.OverlapCircle(movePoint.position + new Vector3(0f, 1f), .2f, SpecialTiles).gameObject;
+                    GameObject pushedObject = Physics2D.OverlapCircle((Vector2)movePoint.position + Vector2.up, .2f, SpecialTiles).gameObject;
                     Move(MoveDirections.Down, true, false);
                     IPushable pushable = pushedObject.GetComponent<IPushable>();
                     pushable.UndoPush();
@@ -280,7 +277,7 @@ namespace LittleSubmarine2
                 }
                 case MoveTypes.PUSHDOWN:
                 {
-                    GameObject pushedObject = Physics2D.OverlapCircle(movePoint.position + new Vector3(0f, -1f), .2f, SpecialTiles).gameObject;
+                    GameObject pushedObject = Physics2D.OverlapCircle((Vector2)movePoint.position + Vector2.down, .2f, SpecialTiles).gameObject;
                     Move(MoveDirections.Up, true, false);
                     IPushable pushable = pushedObject.GetComponent<IPushable>();
                     pushable.UndoPush();
@@ -288,7 +285,7 @@ namespace LittleSubmarine2
                 }
                 case MoveTypes.PUSHLEFT:
                 {
-                    GameObject pushedObject = Physics2D.OverlapCircle(movePoint.position + new Vector3(-1f, 0f), .2f, SpecialTiles).gameObject;
+                    GameObject pushedObject = Physics2D.OverlapCircle((Vector2)movePoint.position + Vector2.left, .2f, SpecialTiles).gameObject;
                     Move(MoveDirections.Right, true, false);
                     IPushable pushable = pushedObject.GetComponent<IPushable>();
                     pushable.UndoPush();
@@ -296,7 +293,7 @@ namespace LittleSubmarine2
                 }
                 case MoveTypes.PUSHRIGHT:
                 {
-                    GameObject pushedObject = Physics2D.OverlapCircle(movePoint.position + new Vector3(1f, 0f), .2f, SpecialTiles).gameObject;
+                    GameObject pushedObject = Physics2D.OverlapCircle((Vector2)movePoint.position + Vector2.right, .2f, SpecialTiles).gameObject;
                     Move(MoveDirections.Left, true, false);
                     IPushable pushable = pushedObject.GetComponent<IPushable>();
                     pushable.UndoPush();
