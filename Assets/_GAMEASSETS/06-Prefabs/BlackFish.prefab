@@ -13,7 +13,8 @@ GameObject:
   - component: {fileID: 8603629041619941272}
   - component: {fileID: 8603629041619941254}
   - component: {fileID: 8148824153323162133}
-  m_Layer: 6
+  - component: {fileID: 7196809650218833324}
+  m_Layer: 7
   m_Name: BlackFish
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -118,6 +119,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &7196809650218833324
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8603629041619941277}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 133acc24070f7d548b85c339466ee410, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tileType: 1
 --- !u!1 &8603629041960400644
 GameObject:
   m_ObjectHideFlags: 0
@@ -127,7 +141,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8603629041960400645}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: MovePoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -158,7 +172,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8603629042874101725}
   - component: {fileID: 8603629042874101722}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: BlackFish
   m_TagString: Untagged
   m_Icon: {fileID: 0}

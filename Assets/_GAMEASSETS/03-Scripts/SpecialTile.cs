@@ -6,7 +6,7 @@ public class SpecialTile : MonoBehaviour
 {
     [SerializeField] private SpecialTileTypes tileType;
 
-    public SpecialTileTypes GetType()
+    public SpecialTileTypes GetTileType()
     {
         return tileType;
     }
@@ -15,6 +15,8 @@ public class SpecialTile : MonoBehaviour
 public enum SpecialTileTypes
 {
     NONE,
+    PUSHABLE,
     ONEWAY,
-    CONVEYERBELT
+    CONVEYERBELT,
+    DEADLY
 }

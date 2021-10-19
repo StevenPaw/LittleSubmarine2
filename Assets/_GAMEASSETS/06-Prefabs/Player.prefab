@@ -263,6 +263,9 @@ MonoBehaviour:
   WhatCanBePushed:
     serializedVersion: 2
     m_Bits: 64
+  SpecialTiles:
+    serializedVersion: 2
+    m_Bits: 128
   playerSpriteGO: {fileID: 7193182937873070951}
   playerBodySprite: {fileID: 80538310766674129}
   playerPeriscopeSprite: {fileID: 8481600981513008025}

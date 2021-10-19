@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9105687627277225443}
   - component: {fileID: 9105687627277225444}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: YellowFish
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -95,7 +95,8 @@ GameObject:
   - component: {fileID: 9105687628170417574}
   - component: {fileID: 9105687628170417592}
   - component: {fileID: 1399896062981721971}
-  m_Layer: 6
+  - component: {fileID: 8061197071015488420}
+  m_Layer: 7
   m_Name: YellowFish
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -200,6 +201,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &8061197071015488420
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9105687628170417571}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 133acc24070f7d548b85c339466ee410, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tileType: 1
 --- !u!1 &9105687628651517242
 GameObject:
   m_ObjectHideFlags: 0
@@ -209,7 +223,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9105687628651517243}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: MovePoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -11,7 +11,7 @@ namespace LittleSubmarine2
     [SerializeField] private LayerMask WhatStopsMovement;
     [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private bool canMoveOtherBlocks = false;
-    public LayerMask WhatCanBeMoved;
+    public LayerMask SpecialTiles;
     [SerializeField] private PushableTypes blockType;
     
     private HistoryManager history;
@@ -59,7 +59,7 @@ namespace LittleSubmarine2
             {
                 //DO NOTHING
             }
-            else if (Physics2D.OverlapCircle(movePoint.position + new Vector3(1f, 0f), .2f, WhatCanBeMoved))
+            else if (Physics2D.OverlapCircle(movePoint.position + new Vector3(1f, 0f), .2f, SpecialTiles))
             {
                 if (canMoveOtherBlocks)
                 {
@@ -83,7 +83,7 @@ namespace LittleSubmarine2
             {
                 //DO NOTHING
             }
-            else if (Physics2D.OverlapCircle(movePoint.position + new Vector3(-1f, 0f), .2f, WhatCanBeMoved))
+            else if (Physics2D.OverlapCircle(movePoint.position + new Vector3(-1f, 0f), .2f, SpecialTiles))
             {
                 if (canMoveOtherBlocks)
                 {
@@ -108,7 +108,7 @@ namespace LittleSubmarine2
             {
                 
             }
-            else if (Physics2D.OverlapCircle(movePoint.position + new Vector3(0f, 1f), .2f, WhatCanBeMoved))
+            else if (Physics2D.OverlapCircle(movePoint.position + new Vector3(0f, 1f), .2f, SpecialTiles))
             {
                 if (canMoveOtherBlocks)
                 {
@@ -132,7 +132,7 @@ namespace LittleSubmarine2
             {
                 //DO NOTHING
             }
-            else if (Physics2D.OverlapCircle(movePoint.position + new Vector3(0f, -1f), .2f, WhatCanBeMoved))
+            else if (Physics2D.OverlapCircle(movePoint.position + new Vector3(0f, -1f), .2f, SpecialTiles))
             {
                 if (canMoveOtherBlocks)
                 {
@@ -155,43 +155,11 @@ namespace LittleSubmarine2
     private bool MoveBlockBack(Vector2 moveDirection, float moveSpeedIn)
     {
         moveSpeed = moveSpeedIn;
-        
-        //RIGHT MOVEMENT
-        if (moveDirection == Vector2.right)
-        {
-            if (!Physics2D.OverlapCircle(movePoint.position + new Vector3(1f, 0f), .2f, WhatStopsMovement))
-            {
-                movePoint.position += new Vector3(1f, 0f);
-                return true;
-            }
-        }
-        //LEFT MOVEMENT
-        else if (moveDirection == Vector2.left)
-        {
-            if (!Physics2D.OverlapCircle(movePoint.position + new Vector3(-1f, 0f), .2f, WhatStopsMovement))
-            {
-                movePoint.position += new Vector3(-1f, 0f);
-                return true;
-            }
-        }
 
-        //UP MOVEMENT
-        else if (moveDirection == Vector2.up)
+        if (!Physics2D.OverlapCircle(movePoint.position + new Vector3(moveDirection.x, moveDirection.y), .2f, WhatStopsMovement))
         {
-            if (!Physics2D.OverlapCircle(movePoint.position + new Vector3(0f, 1f), .2f, WhatStopsMovement))
-            {
-                movePoint.position += new Vector3(0f, 1f);
-                return true;
-            }
-        }
-        //DOWN MOVEMENT
-        else if (moveDirection == Vector2.down)
-        {
-            if (!Physics2D.OverlapCircle(movePoint.position + new Vector3(0f, -1f), .2f, WhatStopsMovement))
-            {
-                movePoint.position += new Vector3(0f, -1f);
-                return true;
-            }
+            movePoint.position += new Vector3(moveDirection.x, moveDirection.y);
+            return true;
         }
 
         return false;
