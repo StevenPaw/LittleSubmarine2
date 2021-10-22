@@ -23,13 +23,21 @@ namespace LittleSubmarine2
         [SerializeField] private TMP_Text timeText;
 
         [Header("Stars")] 
-        [SerializeField] private Image star1Filled;
-        [SerializeField] private Image star2Filled;
-        [SerializeField] private Image star3Filled;
+        [SerializeField] private Image[] starImage;
+        [SerializeField] private Sprite starSpriteFilled;
+        [SerializeField] private Sprite starSpriteEmpty;
         [SerializeField] private int maxMovesForStar2;
         [SerializeField] private int maxMovesForStar3;
+        
+        [Header("Clock")]
+        [SerializeField] private Image clockImage;
+        [SerializeField] private Sprite clockSpriteFilled;
+        [SerializeField] private Sprite clockSpriteEmpty;
+        [SerializeField] private int maxSecondsForClock;
 
         private int earnedStars;
+        private bool earnedClock;
+        private int extraCoins = 0;
 
         private SaveManager saveManager;
         private PlayerController playerController;
@@ -64,27 +72,31 @@ namespace LittleSubmarine2
                 }
                 
                 earnedStars = 1;
-                star1Filled.DOFade(1f, 0.5f);
+                starImage[0].DOCrossfadeImage(starSpriteFilled, 0.5f);
                 
                 if (usedMoves <= maxMovesForStar2)
                 {
                     Debug.Log("UsedMoves: " + usedMoves + " for max (2): " + maxMovesForStar2);
-                    star2Filled.DOFade(1f, 1f);
+                    starImage[1].DOCrossfadeImage(starSpriteFilled, 1.0f);
                     earnedStars += 1;
                 }
                 if (usedMoves <= maxMovesForStar3)
                 {
-                    star3Filled.DOFade(1f, 1.5f);
+                    starImage[2].DOCrossfadeImage(starSpriteFilled, 1.5f);
                     earnedStars += 1;
                 }
-                
-                Debug.Log("Earned Stars: " + earnedStars);
-                
+
+                if (usedTime.TotalSeconds < maxSecondsForClock)
+                {
+                    clockImage.DOCrossfadeImage(clockSpriteFilled, 2.0f);
+                    earnedClock = true;
+                    extraCoins += coinsPerStar;
+                }
+
                 int newEarnedStars = earnedStars - saveManager.GetData().levelCompleted[(world * 9) + level];
-                
-                Debug.Log("new Earned Stars: " + newEarnedStars);
-                
-                if (newEarnedStars <= 0)
+                bool newEarnedClock = saveManager.GetData().clockCompleted[(world * 9) + level] != true && earnedClock;
+
+                if (newEarnedStars <= 0 && !newEarnedClock)
                 {
                     addedCoinsGO.SetActive(false);
                 }
@@ -92,8 +104,8 @@ namespace LittleSubmarine2
                 {
                     addedCoinsGO.SetActive(true);
                     coinsAmountText.text = "+ " + coinsPerStar * newEarnedStars;
-                    saveManager.AddCoins(coinsPerStar * newEarnedStars);
-                    saveManager.AddCompletedLevel(world, level, earnedStars);
+                    saveManager.AddCoins(coinsPerStar * newEarnedStars + extraCoins);
+                    saveManager.AddCompletedLevel(world, level, earnedStars, earnedClock);
                 }
                 
                 saveManager.SaveGame();
@@ -108,6 +120,11 @@ namespace LittleSubmarine2
         public void OnNextLevel()
         {
             SceneManager.LoadScene(nextLevel);
+        }
+
+        public void OnRetryLevel()
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }
 }

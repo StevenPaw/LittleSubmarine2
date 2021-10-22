@@ -35828,10 +35828,6 @@ PrefabInstance:
       propertyPath: m_AdditionalShaderChannelsFlag
       value: 25
       objectReference: {fileID: 0}
-    - target: {fileID: 2701348644683160656, guid: 9837b7f223c48664cb72b36a7174dd1a, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -50.000015
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9837b7f223c48664cb72b36a7174dd1a, type: 3}
 --- !u!1001 &7718526936648344288

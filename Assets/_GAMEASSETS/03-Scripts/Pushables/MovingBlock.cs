@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace LittleSubmarine2
@@ -10,15 +11,16 @@ namespace LittleSubmarine2
     [SerializeField] private Transform movePoint;
     [SerializeField] private LayerMask WhatStopsMovement;
     [SerializeField] private float moveSpeed = 5f;
-    [SerializeField] private bool canMoveOtherBlocks = false;
-    public LayerMask SpecialTiles;
+    public LayerMask specialTiles;
     [SerializeField] private PushableTypes blockType;
     
     private HistoryManager history;
+    private Collider2D selfCollider;
 
     private void Start()
     {
         history = GetComponent<HistoryManager>();
+        selfCollider = GetComponent<Collider2D>();
         movePoint.parent = null;
     }
 
@@ -48,113 +50,64 @@ namespace LittleSubmarine2
         }
     }
     
-    public bool Push(Vector2 moveDirection, float moveSpeedIn)
+    public bool Push(Vector2 direction, float moveSpeedIn)
     {
         moveSpeed = moveSpeedIn;
 
-        //RIGHT MOVEMENT
-        if (moveDirection == Vector2.right)
+        MoveTypes moveType = MoveTypes.EMPTY;
+        
+        if (direction == Vector2.down)
         {
-            if (Physics2D.OverlapCircle(movePoint.position + new Vector3(1f, 0f), .2f, WhatStopsMovement))
-            {
-                //DO NOTHING
-            }
-            else if (Physics2D.OverlapCircle(movePoint.position + new Vector3(1f, 0f), .2f, SpecialTiles))
-            {
-                SpecialTile tile = Physics2D.OverlapCircle(movePoint.position + new Vector3(1f, 0f), .2f, SpecialTiles)
-                    .GetComponent<SpecialTile>();
-                if (CanUseSpecialTile(tile, moveDirection,MoveTypes.MOVERIGHT,true))
-                {
-                    //TODO: Push other Block
-                    movePoint.position += new Vector3(1f, 0f);
-                    return true;
-                }
-            }
-            else
-            {
-                history.addMove(MoveTypes.MOVERIGHT);
-                movePoint.position += new Vector3(1f, 0f);
-                return true;
-            }
+            moveType = MoveTypes.MOVEDOWN;
         }
-        //LEFT MOVEMENT
-        else if (moveDirection == Vector2.left)
+        if (direction == Vector2.up)
         {
-            if (Physics2D.OverlapCircle(movePoint.position + new Vector3(-1f, 0f), .2f, WhatStopsMovement))
-            {
-                //DO NOTHING
-            }
-            else if (Physics2D.OverlapCircle(movePoint.position + new Vector3(-1f, 0f), .2f, SpecialTiles))
-            {
-                if (canMoveOtherBlocks)
-                {
-                    //TODO: Push other Block
-                    history.addMove(MoveTypes.PUSHLEFT);
-                    movePoint.position += new Vector3(-1f, 0f);
-                    return true;
-                }
-            }
-            else
-            {
-                history.addMove(MoveTypes.MOVELEFT);
-                    movePoint.position += new Vector3(-1f, 0f);
-                    return true;
-            }
+            moveType = MoveTypes.MOVEUP;
+        }
+        if (direction == Vector2.left)
+        {
+            moveType = MoveTypes.MOVELEFT;
+        }
+        if (direction == Vector2.right)
+        {
+            moveType = MoveTypes.MOVERIGHT;
         }
 
-        //UP MOVEMENT
-        else if (moveDirection == Vector2.up)
+        if (Physics2D.OverlapCircle((Vector2) movePoint.position, .2f, specialTiles))
         {
-            if (Physics2D.OverlapCircle(movePoint.position + new Vector3(0f, 1f), .2f, WhatStopsMovement))
+            if (!TileHelper.CanLeaveSpecialTile(selfCollider, direction, specialTiles))
             {
-                
+                return false;
             }
-            else if (Physics2D.OverlapCircle(movePoint.position + new Vector3(0f, 1f), .2f, SpecialTiles))
+        }
+        
+        if (Physics2D.OverlapCircle((Vector2)movePoint.position + direction, .2f, WhatStopsMovement))
+        {
+            //DO NOTHING
+        }
+        else if (Physics2D.OverlapCircle((Vector2)movePoint.position + direction, .2f, specialTiles))
+        {
+            SpecialTile tile = Physics2D.OverlapCircle((Vector2)movePoint.position + direction, .2f, specialTiles).GetComponent<SpecialTile>();
+            if (TileHelper.CanUseSpecialTile(tile, direction, moveType,true, moveSpeed, history))
             {
-                if (canMoveOtherBlocks)
-                {
-                    //TODO: Push other Block
-                    history.addMove(MoveTypes.PUSHUP);
-                    movePoint.position += new Vector3(0f, 1f);
-                    return true;
-                }
-            }
-            else
-            {
-                history.addMove(MoveTypes.MOVEUP);
-                movePoint.position += new Vector3(0f, 1f);
+                //TODO: Push other Block
+                movePoint.position += new Vector3(direction.x, direction.y);
                 return true;
             }
         }
-        //DOWN MOVEMENT
-        else if (moveDirection == Vector2.down)
+        else
         {
-            if (Physics2D.OverlapCircle(movePoint.position + new Vector3(0f, -1f), .2f, WhatStopsMovement))
-            {
-                //DO NOTHING
-            }
-            else if (Physics2D.OverlapCircle(movePoint.position + new Vector3(0f, -1f), .2f, SpecialTiles))
-            {
-                if (canMoveOtherBlocks)
-                {
-                    history.addMove(MoveTypes.PUSHDOWN);
-                    movePoint.position += new Vector3(0f, -1f);
-                    return true;
-                }
-            }
-            else
-            {
-                history.addMove(MoveTypes.MOVEDOWN);
-                movePoint.position += new Vector3(0f, -1f);
-                return true;
-            }
+            history.addMove(moveType);
+            movePoint.position += new Vector3(direction.x, direction.y);
+            return true;
         }
 
         return false;
     }
     
-    private bool CanUseSpecialTile(SpecialTile tileIn, Vector2 direction, MoveTypes moveType, bool saveHistory)
+    /*private bool CanUseSpecialTile(SpecialTile tileIn, Vector2 direction, MoveTypes moveType, bool saveHistory)
     {
+        Debug.Log("Test Special Tile: " + tileIn.name);
         switch (tileIn.GetTileType())
         {
             default:
@@ -174,13 +127,26 @@ namespace LittleSubmarine2
         }
     }
     
-    private bool MoveBlockBack(Vector2 moveDirection, float moveSpeedIn)
+    private bool CanLeaveSpecialTile(SpecialTile tileIn, Vector2 direction, MoveTypes moveType)
+    {
+        Debug.Log("Test Special Tile: " + tileIn.name);
+        switch (tileIn.GetTileType())
+        {
+            default:
+                return true;
+            case SpecialTileTypes.ONEWAY:
+                Oneway ow = tileIn.GetComponent<Oneway>();
+                return direction == ow.GetDirection();
+        }
+    }*/
+    
+    private bool MoveBlockBack(Vector2 direction, float moveSpeedIn)
     {
         moveSpeed = moveSpeedIn;
 
-        if (!Physics2D.OverlapCircle(movePoint.position + new Vector3(moveDirection.x, moveDirection.y), .2f, WhatStopsMovement))
+        if (!Physics2D.OverlapCircle(movePoint.position + new Vector3(direction.x, direction.y), .2f, WhatStopsMovement))
         {
-            movePoint.position += new Vector3(moveDirection.x, moveDirection.y);
+            movePoint.position += new Vector3(direction.x, direction.y);
             return true;
         }
 

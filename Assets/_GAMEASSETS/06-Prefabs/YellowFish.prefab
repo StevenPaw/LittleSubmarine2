@@ -137,9 +137,9 @@ MonoBehaviour:
     m_Bits: 72
   moveSpeed: 5
   canMoveOtherBlocks: 0
-  WhatCanBeMoved:
+  specialTiles:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
   blockType: 1
 --- !u!61 &9105687628170417574
 BoxCollider2D:

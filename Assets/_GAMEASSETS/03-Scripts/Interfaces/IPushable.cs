@@ -4,7 +4,7 @@ namespace LittleSubmarine2
 {
     public interface IPushable
     {
-        public bool Push(Vector2 moveDirectionIn, float moveSpeedIn);
+        public bool Push(Vector2 direction, float moveSpeedIn);
         public void UndoPush();
         public PushableTypes GetPushableType();
     }

@@ -96,9 +96,11 @@ namespace LittleSubmarine2
             return playerData;
         }
 
-        public void AddCompletedLevel(int world, int level, int stars)
+        public void AddCompletedLevel(int world, int level, int stars, bool clock)
         {
             playerData.levelCompleted[(world * 9) + level] = stars;
+            playerData.clockCompleted[(world * 9) + level] = clock;
+            Debug.Log("Adding Clock to Save: " + clock);
             SaveGame();
         }
 

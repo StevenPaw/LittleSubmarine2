@@ -257,13 +257,10 @@ MonoBehaviour:
   moveSpeed: 5
   arrowButtons: {fileID: 6345775053246682724}
   movePoint: {fileID: 1983066708401229109}
-  WhatStopsMovement:
+  whatStopsMovement:
     serializedVersion: 2
     m_Bits: 8
-  WhatCanBePushed:
-    serializedVersion: 2
-    m_Bits: 64
-  SpecialTiles:
+  specialTiles:
     serializedVersion: 2
     m_Bits: 128
   playerSpriteGO: {fileID: 7193182937873070951}
