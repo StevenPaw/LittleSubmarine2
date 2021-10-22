@@ -88,7 +88,11 @@ namespace LittleSubmarine2
         else if (Physics2D.OverlapCircle((Vector2)movePoint.position + direction, .2f, specialTiles))
         {
             SpecialTile tile = Physics2D.OverlapCircle((Vector2)movePoint.position + direction, .2f, specialTiles).GetComponent<SpecialTile>();
-            if (TileHelper.CanUseSpecialTile(tile, direction, moveType,true, moveSpeed, history))
+            if (tile.GetTileType() == SpecialTileTypes.PUSHABLE)
+            {
+                return false;
+            }
+            else if (TileHelper.CanUseSpecialTile(tile, direction, moveType,true, moveSpeed, history))
             {
                 //TODO: Push other Block
                 movePoint.position += new Vector3(direction.x, direction.y);

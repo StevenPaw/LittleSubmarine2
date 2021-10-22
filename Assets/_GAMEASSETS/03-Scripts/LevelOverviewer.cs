@@ -22,7 +22,7 @@ namespace LittleSubmarine2
         {
             saveManager = GameObject.FindGameObjectWithTag(GameTags.SAVEMANAGER).GetComponent<SaveManager>();
             moneyText.text = saveManager.GetCoins().ToString();
-            int completedLevelCount = 0;
+            int completedLevelCount = -1; //Exclude the Tutorial World
             int completedWorlds = 0;
             foreach (int levelStars in saveManager.GetData().levelCompleted)
             {
