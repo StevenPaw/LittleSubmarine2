@@ -187,8 +187,8 @@ namespace LittleSubmarine2
             switch (tileIn.GetTileType())
             {
                 default:
-                    return true;
                     history.addMove(moveType);
+                    return true;
                 case SpecialTileTypes.ONEWAY:
                     Oneway ow = tileIn.GetComponent<Oneway>();
                     history.addMove(moveType);
