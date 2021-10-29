@@ -96,6 +96,7 @@ GameObject:
   - component: {fileID: 9105687628170417592}
   - component: {fileID: 1399896062981721971}
   - component: {fileID: 8061197071015488420}
+  - component: {fileID: 2164404278303528490}
   m_Layer: 7
   m_Name: YellowFish
   m_TagString: Untagged
@@ -136,11 +137,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 72
   moveSpeed: 5
-  canMoveOtherBlocks: 0
-  specialTiles:
-    serializedVersion: 2
-    m_Bits: 128
   blockType: 1
+  anim: {fileID: 2164404278303528490}
+  history: {fileID: 9105687628170417592}
+  selfCollider: {fileID: 9105687628170417574}
 --- !u!61 &9105687628170417574
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -179,7 +179,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40b8593b5d4c4831869b5079a305c6f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moves: 
 --- !u!50 &1399896062981721971
 Rigidbody2D:
   serializedVersion: 4
@@ -214,6 +213,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tileType: 1
+--- !u!95 &2164404278303528490
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9105687628170417571}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &9105687628651517242
 GameObject:
   m_ObjectHideFlags: 0
@@ -226,7 +244,7 @@ GameObject:
   m_Layer: 7
   m_Name: MovePoint
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 6519382022992737161, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1

@@ -26,7 +26,6 @@ namespace LittleSubmarine2
             int completedWorlds = 0;
             foreach (int levelStars in saveManager.GetData().levelCompleted)
             {
-                Debug.Log("levelStars = " + levelStars);
                 if (levelStars > 0)
                 {
                     completedLevelCount += 1;
@@ -38,8 +37,6 @@ namespace LittleSubmarine2
                     completedLevelCount = 0;
                 }
             }
-            
-            Debug.Log("Completed Worlds: " + completedWorlds);
 
             if (completedWorlds < worldPanels.Length - 1 && completedWorlds > 0)
             {

@@ -179,19 +179,7 @@ MonoBehaviour:
     m_ActionId: d25284a7-5bfa-479d-8a35-1641cfd5039e
     m_ActionName: Ingame/Direction[/Keyboard/s,/Keyboard/w,/Keyboard/a,/Keyboard/d]
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 423823152705686101}
-        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
-        m_MethodName: BTN_Pause
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_ActionId: 0b740010-7be1-4d85-ab5c-c2c2acaf4e7c
     m_ActionName: Ingame/Pause[/Keyboard/escape,/Keyboard/p]
   - m_PersistentCalls:
@@ -266,6 +254,7 @@ MonoBehaviour:
   playerSpriteGO: {fileID: 7193182937873070951}
   playerBodySprite: {fileID: 80538310766674129}
   playerPeriscopeSprite: {fileID: 8481600981513008025}
+  selfCollider: {fileID: 0}
   canMove: 1
   moveCounterText: {fileID: 6674632642975876155}
   usedMoves: 0
@@ -281,7 +270,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40b8593b5d4c4831869b5079a305c6f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moves: 
 --- !u!50 &1716350368376295338
 Rigidbody2D:
   serializedVersion: 4

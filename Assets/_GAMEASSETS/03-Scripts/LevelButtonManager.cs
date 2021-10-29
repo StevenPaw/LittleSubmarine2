@@ -22,14 +22,14 @@ namespace LittleSubmarine2
         
         private SaveManager saveManager;
         private bool isAvailable = false;
-        private UnityEngine.UI.Button button;
+        private Button button;
         private int stars;
         private bool clock;
 
         private void Start()
         {
             saveManager = GameObject.FindGameObjectWithTag(GameTags.SAVEMANAGER).GetComponent<SaveManager>();
-            button = GetComponent<UnityEngine.UI.Button>();
+            button = GetComponent<Button>();
             
             foreach (Image img in starImages)
             {

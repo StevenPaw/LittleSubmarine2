@@ -9,18 +9,38 @@ namespace LittleSubmarine2
     public class MovingBlock : MonoBehaviour, IPushable
 {
     [SerializeField] private Transform movePoint;
-    [SerializeField] private LayerMask WhatStopsMovement;
-    [SerializeField] private float moveSpeed = 5f;
-    public LayerMask specialTiles;
+    [Range(0.0f, 10.0f)] [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private PushableTypes blockType;
-    
-    private HistoryManager history;
-    private Collider2D selfCollider;
+    [SerializeField] private Animator anim;
+    [SerializeField] private HistoryManager history;
+    [SerializeField] private Collider2D selfCollider;
 
+    public Transform MovePoint
+    {
+        get => movePoint;
+        set => movePoint = value;
+    }
+
+    public Collider2D SelfCollider
+    {
+        get => selfCollider;
+        set => selfCollider = value;
+    }
+
+    public HistoryManager History
+    {
+        get => history;
+        set => history = value;
+    }
+
+    public Animator Anim
+    {
+        get => anim;
+        set => anim = value;
+    }
+    
     private void Start()
     {
-        history = GetComponent<HistoryManager>();
-        selfCollider = GetComponent<Collider2D>();
         movePoint.parent = null;
     }
 
@@ -31,127 +51,35 @@ namespace LittleSubmarine2
 
     public void UndoPush()
     {
-        MoveTypes undoMove = history.getUndoMove();
-        if (undoMove == MoveTypes.MOVEUP)
-        {
-            MoveBlockBack(Vector2.down, moveSpeed);
-        }
-        if (undoMove == MoveTypes.MOVEDOWN)
-        {
-            MoveBlockBack(Vector2.up, moveSpeed);
-        }
-        if (undoMove == MoveTypes.MOVELEFT)
-        {
-            MoveBlockBack(Vector2.right, moveSpeed);
-        }
-        if (undoMove == MoveTypes.MOVERIGHT)
-        {
-            MoveBlockBack(Vector2.left, moveSpeed);
-        }
+        Command lastCommand = history.getUndoMove();
+        lastCommand.Undo();
     }
     
-    public bool Push(Vector2 direction, float moveSpeedIn)
+    public bool Push(Vector2 direction)
     {
-        moveSpeed = moveSpeedIn;
-
-        MoveTypes moveType = MoveTypes.EMPTY;
-        
-        if (direction == Vector2.down)
+        if (Physics2D.OverlapCircle(movePoint.position + new Vector3(direction.x, direction.y), .2f, LayerTypes.SOLID))
         {
-            moveType = MoveTypes.MOVEDOWN;
+            return false;
         }
-        if (direction == Vector2.up)
+        else if (Physics2D.OverlapCircle(movePoint.position + new Vector3(direction.x, direction.y), .2f, LayerTypes.SPECIALTILES))
         {
-            moveType = MoveTypes.MOVEUP;
-        }
-        if (direction == Vector2.left)
-        {
-            moveType = MoveTypes.MOVELEFT;
-        }
-        if (direction == Vector2.right)
-        {
-            moveType = MoveTypes.MOVERIGHT;
-        }
-
-        if (Physics2D.OverlapCircle((Vector2) movePoint.position, .2f, specialTiles))
-        {
-            if (!TileHelper.CanLeaveSpecialTile(selfCollider, direction, specialTiles))
+            SpecialTile tile = Physics2D.OverlapCircle(movePoint.position + new Vector3(direction.x, direction.y), .2f, LayerTypes.SPECIALTILES)
+                .GetComponent<SpecialTile>();
+            if (tile.GetTileType() != SpecialTileTypes.PUSHABLE)
             {
-                return false;
-            }
-        }
-        
-        if (Physics2D.OverlapCircle((Vector2)movePoint.position + direction, .2f, WhatStopsMovement))
-        {
-            //DO NOTHING
-        }
-        else if (Physics2D.OverlapCircle((Vector2)movePoint.position + direction, .2f, specialTiles))
-        {
-            SpecialTile tile = Physics2D.OverlapCircle((Vector2)movePoint.position + direction, .2f, specialTiles).GetComponent<SpecialTile>();
-            if (tile.GetTileType() == SpecialTileTypes.PUSHABLE)
-            {
-                return false;
-            }
-            else if (TileHelper.CanUseSpecialTile(tile, direction, moveType,true, moveSpeed, history))
-            {
-                //TODO: Push other Block
-                movePoint.position += new Vector3(direction.x, direction.y);
-                return true;
+                if (TileHelper.CanUseSpecialTile(tile, direction, true, this))
+                {
+                    return true;
+                }
             }
         }
         else
         {
-            history.addMove(moveType);
-            movePoint.position += new Vector3(direction.x, direction.y);
-            return true;
-        }
-
-        return false;
-    }
-    
-    /*private bool CanUseSpecialTile(SpecialTile tileIn, Vector2 direction, MoveTypes moveType, bool saveHistory)
-    {
-        Debug.Log("Test Special Tile: " + tileIn.name);
-        switch (tileIn.GetTileType())
-        {
-            default:
-                history.addMove(moveType);
+            Command move = new Move(this, direction);
+            if (move.Execute())
+            {
                 return true;
-            case SpecialTileTypes.ONEWAY:
-                Oneway ow = tileIn.GetComponent<Oneway>();
-                history.addMove(moveType);
-                return direction == ow.GetDirection();
-            case SpecialTileTypes.PUSHABLE:
-                if (canMoveOtherBlocks)
-                {
-                    history.addMove(moveType);
-                    return true;
-                }
-                return false;
-        }
-    }
-    
-    private bool CanLeaveSpecialTile(SpecialTile tileIn, Vector2 direction, MoveTypes moveType)
-    {
-        Debug.Log("Test Special Tile: " + tileIn.name);
-        switch (tileIn.GetTileType())
-        {
-            default:
-                return true;
-            case SpecialTileTypes.ONEWAY:
-                Oneway ow = tileIn.GetComponent<Oneway>();
-                return direction == ow.GetDirection();
-        }
-    }*/
-    
-    private bool MoveBlockBack(Vector2 direction, float moveSpeedIn)
-    {
-        moveSpeed = moveSpeedIn;
-
-        if (!Physics2D.OverlapCircle(movePoint.position + new Vector3(direction.x, direction.y), .2f, WhatStopsMovement))
-        {
-            movePoint.position += new Vector3(direction.x, direction.y);
-            return true;
+            }
         }
 
         return false;

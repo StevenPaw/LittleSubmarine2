@@ -6,27 +6,41 @@ namespace LittleSubmarine2
 {
     public static class TileHelper
     {
-        public static bool CanUseSpecialTile(SpecialTile tileIn, Vector2 direction, MoveTypes moveType, bool saveHistory, float moveSpeed, HistoryManager history)
+        public static bool CanUseSpecialTile(SpecialTile tileIn, Vector2 direction, bool saveHistory, IMovable movable)
         {
             switch (tileIn.GetTileType())
             {
                 default:
-                    history.addMove(moveType);
-                    return true;
+                    Command simplemove = new Move(movable, direction);
+                    if (simplemove.Execute())
+                    {
+                        return true;
+                    }
+                    return false;
+                
                 case SpecialTileTypes.ONEWAY:
                     Oneway ow = tileIn.GetComponent<Oneway>();
                     if (direction == ow.GetDirection())
                     {
-                        history.addMove(moveType);
-                        return true;
+                        Command move = new Move(movable, direction);
+                        if (move.Execute())
+                        {
+                            return true;
+                        }
                     }
-                    else
-                    {
-                        return false;
-                    }
+                    return false;
+                
                 case SpecialTileTypes.PUSHABLE:
-                    GameObject pushedObject = tileIn.gameObject;
-                    return PushBlock(pushedObject, direction, moveSpeed, history);
+                    IPushable pushedObject = tileIn.gameObject.GetComponent<IPushable>();
+                    if (pushedObject.Push(direction))
+                    {
+                        Command pushMove = new Push(movable, pushedObject, direction);
+                        if (pushMove.Execute())
+                        {
+                            return true;
+                        }
+                    }
+                    return false;
             }
         }
         
@@ -60,35 +74,6 @@ namespace LittleSubmarine2
             }
 
             return true;
-        }
-        
-        public static bool PushBlock(GameObject blockToPush, Vector2 direction, float moveSpeed, HistoryManager history)
-        {
-            if (blockToPush.GetComponent<IPushable>().Push(direction, moveSpeed))
-            {
-                if (direction == Vector2.down)
-                {
-                    history.addMove(MoveTypes.PUSHDOWN);
-                }
-                if (direction == Vector2.up)
-                {
-                    history.addMove(MoveTypes.PUSHUP);
-                }
-                if (direction == Vector2.left)
-                {
-                    history.addMove(MoveTypes.PUSHLEFT);
-                }
-                if (direction == Vector2.right)
-                {
-                    history.addMove(MoveTypes.PUSHRIGHT);
-                }
-
-                return true;
-            }
-            else
-            {
-                return false;
-            }
         }
     }
     

@@ -18,5 +18,9 @@ namespace LittleSubmarine2
         public bool[] boughtBodies = new bool[256];
         public int selectedPeriscope;
         public int selectedBody;
+        
+        //Settings
+        public bool isUsingSteeringWheel;
+        public Vector2 steeringWheelPosition;
     }
 }

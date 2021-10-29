@@ -6,24 +6,23 @@ namespace LittleSubmarine2
 {
     public class HistoryManager : MonoBehaviour
     {
-        [SerializeField] private List<MoveTypes> moves = new List<MoveTypes>();
+        private Stack<Command> moves = new Stack<Command>();
         
-        public void addMove(MoveTypes type)
+        public void addMove(Command command)
         {
-            moves.Add(type);
+            moves.Push(command);
         }
 
-        public MoveTypes getUndoMove()
+        public Command getUndoMove()
         {
             if (moves.Any())
             {
-                MoveTypes output = moves[moves.Count - 1];
-                moves.RemoveAt(moves.Count - 1);
+                Command output = moves.Pop();
                 return output;
             }
             else
             {
-                return MoveTypes.EMPTY; //Returns empty undo if on Start Position
+                return null; //Returns empty undo if stack is empty
             }
         }
     }
