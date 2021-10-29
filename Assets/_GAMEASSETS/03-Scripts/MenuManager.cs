@@ -20,6 +20,7 @@ namespace LittleSubmarine2
 
         [SerializeField] private Image submarineBody;
         [SerializeField] private Image submarinePeriscope;
+        [SerializeField] private string controlModeScene;
 
         private SaveManager saveManager;
         private PartManager partManager;
@@ -74,6 +75,11 @@ namespace LittleSubmarine2
         public void BTN_DeleteSaves()
         {
             DeleteSavesPrompt.SetActive(true);
+        }
+        
+        public void BTN_ControlMode()
+        {
+            SceneManager.LoadScene(controlModeScene);
         }
         
         public void ClearSaves()

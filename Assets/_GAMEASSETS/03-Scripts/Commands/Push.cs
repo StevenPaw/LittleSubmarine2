@@ -29,14 +29,9 @@ namespace LittleSubmarine2
             
             if (canLeaveTile)
             {
-                Debug.Log("Can Leave Tile");
                 movable.MovePoint.position += new Vector3(direction.x, direction.y);
                 movable.History.addMove(this);
                 return true;
-            }
-            else
-            {
-                Debug.Log("Cant Leave Tile!");
             }
 
             return false;

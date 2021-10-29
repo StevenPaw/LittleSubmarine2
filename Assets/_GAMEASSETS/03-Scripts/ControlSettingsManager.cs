@@ -13,10 +13,12 @@ public class ControlSettingsManager : MonoBehaviour
     [SerializeField] private bool isUsingSteeringWheel;
     [SerializeField] private Toggle usingSteeringWheelToggle;
     private SaveManager saveManager;
+    private SettingsManager settingsManager;
 
     private void Start()
     {
         saveManager = GameObject.FindGameObjectWithTag(GameTags.SAVEMANAGER).GetComponent<SaveManager>();
+        settingsManager = GameObject.FindGameObjectWithTag(GameTags.SETTINGSMANAGER).GetComponent<SettingsManager>();
     }
 
     public void OnBackButton()
@@ -31,5 +33,6 @@ public class ControlSettingsManager : MonoBehaviour
     {
         isUsingSteeringWheel = usingSteeringWheelToggle.isOn;
         steeringWheel.SetActive(isUsingSteeringWheel);
+        settingsManager.SwitchSteeringWheel(isUsingSteeringWheel);
     }
 }

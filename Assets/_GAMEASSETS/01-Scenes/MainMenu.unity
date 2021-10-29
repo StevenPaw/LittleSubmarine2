@@ -1505,7 +1505,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 168.74998, y: -50}
+  m_AnchoredPosition: {x: 168.75, y: -50}
   m_SizeDelta: {x: 337.49997, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &673927982
@@ -1818,7 +1818,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 768302026}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1193603057}
+        m_TargetAssemblyTypeName: LittleSubmarine2.MenuManager, Assembly-CSharp
+        m_MethodName: BTN_ControlMode
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &768302026
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2019,7 +2031,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 62.65
+  m_fontSize: 55.15
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -2153,7 +2165,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 48.2
+  m_fontSize: 42.4
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -2732,6 +2744,7 @@ MonoBehaviour:
   DeleteSavesPrompt: {fileID: 1021293707}
   submarineBody: {fileID: 1661242894}
   submarinePeriscope: {fileID: 1142701890}
+  controlModeScene: ControlSettings
 --- !u!114 &1193603058
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3127,7 +3140,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Control Mode (WIP)
+  m_text: Control Mode
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 67c37f8ddfcfbe44b964bc6cfb88aa19, type: 2}
   m_sharedMaterial: {fileID: 7425648222484342164, guid: 67c37f8ddfcfbe44b964bc6cfb88aa19, type: 2}
@@ -4333,7 +4346,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 117.05
+  m_fontSize: 106.05
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
