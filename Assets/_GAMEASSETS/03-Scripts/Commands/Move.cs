@@ -16,10 +16,13 @@ namespace LittleSubmarine2
         public override bool Execute()
         {
             bool canLeaveTile = true;
-            
-            movable.Anim.SetFloat("horizontal", direction.x);
-            movable.Anim.SetFloat("vertical", direction.y);
-                
+
+            if (movable.Anim != null)
+            {
+                movable.Anim.SetFloat("horizontal", direction.x);
+                movable.Anim.SetFloat("vertical", direction.y);
+            }
+
             if (Physics2D.OverlapCircle((Vector2) movable.MovePoint.position, .2f, LayerTypes.SPECIALTILES))
             {
                 canLeaveTile = TileHelper.CanLeaveSpecialTile(movable.SelfCollider, direction, LayerTypes.SPECIALTILES);
