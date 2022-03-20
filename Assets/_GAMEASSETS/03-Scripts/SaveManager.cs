@@ -15,14 +15,14 @@ namespace LittleSubmarine2
 
         private void Start()
         {
-            if (GameObject.FindGameObjectWithTag(GameTags.SAVEMANAGER) == this.gameObject)
+            if (GameObject.FindGameObjectWithTag(GameTags.SAVEMANAGER) == gameObject)
             {
-                DontDestroyOnLoad(this.gameObject);
+                DontDestroyOnLoad(gameObject);
                 Debug.Log("SaveManager loaded");
             }
             else
             {
-                Destroy(this.gameObject);
+                Destroy(gameObject);
                 Debug.Log("SaveManager destroyed");
             }
 
@@ -77,7 +77,9 @@ namespace LittleSubmarine2
                 if (isReading) {
                     Debug.Log("PlayerData is empty! " + filePath);
                     playerData = new PlayerData();
-                    playerData.levelCompleted = new int[200];
+                    playerData.levelCompleted = new bool[255];
+                    playerData.maxMovesCompleted = new bool[255];
+                    playerData.clockCompleted = new bool[255];
                     string dataString = JsonUtility.ToJson(playerData);
                     File.WriteAllText(filePath, dataString);
                 }
@@ -96,10 +98,11 @@ namespace LittleSubmarine2
             return playerData;
         }
 
-        public void AddCompletedLevel(int world, int level, int stars, bool clock)
+        public void AddCompletedLevel(int level, bool maxMove, bool clock)
         {
-            playerData.levelCompleted[(world * 9) + level] = stars;
-            playerData.clockCompleted[(world * 9) + level] = clock;
+            playerData.levelCompleted[level] = true;
+            playerData.maxMovesCompleted[level] = maxMove;
+            playerData.clockCompleted[level] = clock;
             Debug.Log("Adding Clock to Save: " + clock);
             SaveGame();
         }

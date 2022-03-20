@@ -11,9 +11,6 @@ namespace LittleSubmarine2
     public class Goal : MonoBehaviour
     {
         [SerializeField] private GameObject levelCompleteWindow;
-        [SerializeField] private string nextLevel;
-        [SerializeField] private int world;
-        [SerializeField] private int level;
 
         [SerializeField] private GameObject addedCoinsGO;
         [SerializeField] private int coinsPerStar;
@@ -22,22 +19,21 @@ namespace LittleSubmarine2
         [SerializeField] private TMP_Text movesText;
         [SerializeField] private TMP_Text timeText;
 
+        [SerializeField] private LevelObject levelObj;
+
         [Header("Stars")] 
         [SerializeField] private Image[] starImage;
         [SerializeField] private Sprite starSpriteFilled;
         [SerializeField] private Sprite starSpriteEmpty;
-        [SerializeField] private int maxMovesForStar2;
-        [SerializeField] private int maxMovesForStar3;
         
         [Header("Clock")]
         [SerializeField] private Image clockImage;
         [SerializeField] private Sprite clockSpriteFilled;
         [SerializeField] private Sprite clockSpriteEmpty;
-        [SerializeField] private int maxSecondsForClock;
 
-        private int earnedStars;
         private bool earnedClock;
-        private int extraCoins = 0;
+        private bool earnedMaxMoves;
+        private int newCoins;
 
         private SaveManager saveManager;
         private PlayerController playerController;
@@ -71,41 +67,34 @@ namespace LittleSubmarine2
                     timeText.text = "Time: " + usedTime.ToString(@"mm\:ss");
                 }
                 
-                earnedStars = 1;
-                starImage[0].DOCrossfadeImage(starSpriteFilled, 0.5f);
-                
-                if (usedMoves <= maxMovesForStar2)
+                if (usedMoves <= levelObj.MaxMovesForStar)
                 {
-                    Debug.Log("UsedMoves: " + usedMoves + " for max (2): " + maxMovesForStar2);
+                    Debug.Log("UsedMoves: " + usedMoves + " for max (2): " + levelObj.MaxMovesForStar);
                     starImage[1].DOCrossfadeImage(starSpriteFilled, 1.0f);
-                    earnedStars += 1;
-                }
-                if (usedMoves <= maxMovesForStar3)
-                {
-                    starImage[2].DOCrossfadeImage(starSpriteFilled, 1.5f);
-                    earnedStars += 1;
+                    earnedMaxMoves = true;
                 }
 
-                if (usedTime.TotalSeconds < maxSecondsForClock)
+                if (usedTime.TotalSeconds < levelObj.MaxSecondsForClock)
                 {
                     clockImage.DOCrossfadeImage(clockSpriteFilled, 2.0f);
                     earnedClock = true;
-                    extraCoins += coinsPerStar;
+                    newCoins += coinsPerStar;
                 }
 
-                int newEarnedStars = earnedStars - saveManager.GetData().levelCompleted[(world * 9) + level];
-                bool newEarnedClock = saveManager.GetData().clockCompleted[(world * 9) + level] != true && earnedClock;
+                bool newEarnedCompleted = saveManager.GetData().levelCompleted[levelObj.ID] != true;
+                bool newEarnedMaxMoves = saveManager.GetData().maxMovesCompleted[levelObj.ID] != true && earnedMaxMoves;
+                bool newEarnedClock = saveManager.GetData().clockCompleted[levelObj.ID] != true && earnedClock;
 
-                if (newEarnedStars <= 0 && !newEarnedClock)
+                if (!newEarnedCompleted && !newEarnedClock)
                 {
                     addedCoinsGO.SetActive(false);
                 }
                 else
                 {
                     addedCoinsGO.SetActive(true);
-                    coinsAmountText.text = "+ " + coinsPerStar * newEarnedStars;
-                    saveManager.AddCoins(coinsPerStar * newEarnedStars + extraCoins);
-                    saveManager.AddCompletedLevel(world, level, earnedStars, earnedClock);
+                    coinsAmountText.text = "+ " + newCoins;
+                    saveManager.AddCoins(newCoins);
+                    saveManager.AddCompletedLevel(levelObj.ID, earnedMaxMoves, earnedClock);
                 }
                 
                 saveManager.SaveGame();
@@ -119,7 +108,7 @@ namespace LittleSubmarine2
         
         public void OnNextLevel()
         {
-            SceneManager.LoadScene(nextLevel);
+            SceneManager.LoadScene("Level-" + levelObj.ID + 1);
         }
 
         public void OnRetryLevel()

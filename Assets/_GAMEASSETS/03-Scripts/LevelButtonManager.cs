@@ -1,4 +1,6 @@
 ﻿using System;
+using Cinemachine;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -6,40 +8,36 @@ namespace LittleSubmarine2
 {
     public class LevelButtonManager : MonoBehaviour
     {
-        [Header("Level Value")]
-        [SerializeField] private int world;
-        [SerializeField] private int level;
+        [Header("Level Value")] 
+        [SerializeField] private LevelObject levelObj;
         
-        [Header("StarScore")]
-        [SerializeField] private Image[] starImages;
-        [SerializeField] private Sprite emptyStar;
-        [SerializeField] private Sprite filledStar;
-        
-        [Header("ClockScore")]
+        [Header("Score")]
+        [SerializeField] private Image emptyImage;
+        [SerializeField] private Image completedImage;
         [SerializeField] private Image clockImage;
-        [SerializeField] private Sprite emptyClock;
-        [SerializeField] private Sprite filledClock;
+        [SerializeField] private Image movesImage;
         
         private SaveManager saveManager;
-        private bool isAvailable = false;
+        private bool isAvailable;
         private Button button;
-        private int stars;
-        private bool clock;
+        private bool levelCompleted;
+        private bool maxMovesCompleted;
+        private bool clockCompleted;
 
         private void Start()
         {
             saveManager = GameObject.FindGameObjectWithTag(GameTags.SAVEMANAGER).GetComponent<SaveManager>();
             button = GetComponent<Button>();
+
+            emptyImage.DOFade(0f, 0.0f);
+            emptyImage.DOFade(0f, 0.0f);
+            emptyImage.DOFade(0f, 0.0f);
+            emptyImage.DOFade(0f, 0.0f);
             
-            foreach (Image img in starImages)
-            {
-                img.sprite = emptyStar;
-            }
-            clockImage.sprite = emptyClock;
-            
-            stars = saveManager.GetData().levelCompleted[(world * 9) + level];
-            clock = saveManager.GetData().clockCompleted[(world * 9) + level];
-            UpdateStars();
+            levelCompleted = saveManager.GetData().levelCompleted[levelObj.ID];
+            maxMovesCompleted = saveManager.GetData().maxMovesCompleted[levelObj.ID];
+            clockCompleted = saveManager.GetData().clockCompleted[levelObj.ID];
+            UpdateGoals();
             
             isAvailable = GetAvailability();
             button.interactable = isAvailable;
@@ -47,27 +45,28 @@ namespace LittleSubmarine2
 
         private bool GetAvailability()
         {
-            if ((world * 9) + level > 0)
+            if (levelObj.ID > 0)
             {
-                int collectedStarsInLevelBefore = saveManager.GetData().levelCompleted[(world * 9) + level - 1];
-                return collectedStarsInLevelBefore > 0;
+                return saveManager.GetData().levelCompleted[levelObj.ID - 1];
             }
-            else
-            {
-                return true;
-            }
+            return true;
         }
 
-        private void UpdateStars()
+        private void UpdateGoals()
         {
-            for (int i = 0; i < stars; i++)
+            if (levelCompleted)
             {
-                starImages[i].sprite = filledStar;
+                completedImage.DOFade(1f, 0.5f);
+            }
+            
+            if (clockCompleted)
+            {
+                clockImage.DOFade(1f, 0.5f);
             }
 
-            if (clock)
+            if (maxMovesCompleted)
             {
-                clockImage.sprite = filledClock;
+                movesImage.DOFade(1f, 0.5f);
             }
         }
     }

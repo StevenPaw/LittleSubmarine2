@@ -9,7 +9,8 @@ namespace LittleSubmarine2
     {
         //All information that need to be saved
         public string dateTimeOfSave;
-        public int[] levelCompleted = new int[256];
+        public bool[] levelCompleted = new bool[256];
+        public bool[] maxMovesCompleted = new bool[256];
         public bool[] clockCompleted = new bool[256];
         
         //Shopdata

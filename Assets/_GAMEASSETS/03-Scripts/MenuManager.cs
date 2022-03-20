@@ -57,14 +57,7 @@ namespace LittleSubmarine2
 
         public void ToLevelOverview()
         {
-            if (saveManager.GetData().levelCompleted[0] > 0)
-            {
-                SceneManager.LoadScene(levelOverviewScene);
-            }
-            else
-            {
-                SceneManager.LoadScene(tutorialLevel);
-            }
+            SceneManager.LoadScene(saveManager.GetData().levelCompleted[1] ? Scenes.LEVELOVERVIEW : Scenes.TUTORIAL);
         }
 
         public void BTN_LoadTutorial()

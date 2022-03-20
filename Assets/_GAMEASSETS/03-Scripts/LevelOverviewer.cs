@@ -10,44 +10,28 @@ namespace LittleSubmarine2
 {
     public class LevelOverviewer : MonoBehaviour
     {
-        [SerializeField] private string mainMenuSceneName;
         [SerializeField] private GameObject[] worldPanels;
         [SerializeField] private GameObject[] leftArrows;
         [SerializeField] private GameObject[] rightArrows;
         [SerializeField] private int activeWorld = 0;
         [SerializeField] private TMP_Text moneyText;
+        [SerializeField] private LevelObject[] levels;
         private SaveManager saveManager;
 
         private void Start()
         {
             saveManager = GameObject.FindGameObjectWithTag(GameTags.SAVEMANAGER).GetComponent<SaveManager>();
             moneyText.text = saveManager.GetCoins().ToString();
-            int completedLevelCount = -1; //Exclude the Tutorial World
-            int completedWorlds = 0;
-            foreach (int levelStars in saveManager.GetData().levelCompleted)
+            int completedLevelCount = 0; //Exclude the Tutorial World
+            foreach (bool levelCompleted in saveManager.GetData().levelCompleted)
             {
-                if (levelStars > 0)
+                if (levelCompleted)
                 {
                     completedLevelCount += 1;
                 }
-
-                if (completedLevelCount == 9)
-                {
-                    completedWorlds += 1;
-                    completedLevelCount = 0;
-                }
             }
-
-            if (completedWorlds < worldPanels.Length - 1 && completedWorlds > 0)
-            {
-                activeWorld = completedWorlds;
-            }
+            
             UpdateWorldVisibility();
-        }
-
-        public void BackToMenu()
-        {
-            SceneManager.LoadScene(mainMenuSceneName);
         }
 
         public void IncreaseWorldIndex()
@@ -95,20 +79,15 @@ namespace LittleSubmarine2
 
         public void StartLevel(int levelToLoad)
         {
-            if (SceneManager.GetSceneByName("Level" + activeWorld + "-" + levelToLoad) != null)
+            if (SceneManager.GetSceneByName("Level" + "-" + levelToLoad) != null)
             {
-                SceneManager.LoadScene("Level" + activeWorld + "-" + levelToLoad);
+                SceneManager.LoadScene("Level" + "-" + levelToLoad);
             }
         }
 
         public void BTN_OpenShop()
         {
             SceneManager.LoadScene(Scenes.DECOSHOP);
-        }
-        
-        public void OnEscape(InputAction.CallbackContext ctx)
-        {
-            BackToMenu();
         }
     }
 }
