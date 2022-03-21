@@ -12232,6 +12232,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_MoveRepeatDelay: 0.5
   m_MoveRepeatRate: 0.1
+  m_XRTrackingOrigin: {fileID: 0}
   m_ActionsAsset: {fileID: -944628639613478452, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
   m_PointAction: {fileID: 1054132383583890850, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
   m_MoveAction: {fileID: 3710738434707379630, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
@@ -35073,6 +35074,10 @@ PrefabInstance:
       propertyPath: level
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 2701348644376252552, guid: 9837b7f223c48664cb72b36a7174dd1a, type: 3}
+      propertyPath: levelObj
+      value: 
+      objectReference: {fileID: 11400000, guid: c79ceeba13f15f44484bbc19d6b45768, type: 2}
     - target: {fileID: 2701348644376252552, guid: 9837b7f223c48664cb72b36a7174dd1a, type: 3}
       propertyPath: nextLevel
       value: Level0-9

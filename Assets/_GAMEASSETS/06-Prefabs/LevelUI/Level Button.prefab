@@ -251,7 +251,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 2
+  m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -277,12 +277,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1259963042469001346}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
+        m_TargetAssemblyTypeName: LittleSubmarine2.LevelButtonManager, Assembly-CSharp
+        m_MethodName: StartLevel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -300,11 +300,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0bb0e3f9afa54ee18ae09c8371fbce83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelObj: {fileID: 11400000, guid: 0ec0ab46cfdd21f4cac932e5f868fb1f, type: 2}
+  levelObj: {fileID: 0}
   emptyImage: {fileID: 2930197877630370704}
   completedImage: {fileID: 5599764690270006774}
   clockImage: {fileID: 2180665615728987754}
   movesImage: {fileID: 8352105246933416972}
+  lockedImage: {fileID: 0}
+  textTitle: {fileID: 3697359933406342733}
 --- !u!1 &3697359933406342735
 GameObject:
   m_ObjectHideFlags: 0

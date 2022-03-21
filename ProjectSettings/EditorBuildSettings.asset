@@ -18,7 +18,7 @@ EditorBuildSettings:
     path: Assets/_GAMEASSETS/01-Scenes/DecoShop.unity
     guid: f678d4716e89b1547963bef42654cc84
   - enabled: 1
-    path: Assets/_GAMEASSETS/01-Scenes/Levels/TutorialLevel.unity
+    path: Assets/_GAMEASSETS/01-Scenes/Levels/Level-0.unity
     guid: ed767d08e2ebc0e488636bce7bed58cf
   - enabled: 1
     path: Assets/_GAMEASSETS/01-Scenes/Levels/TestLevel.unity
@@ -27,33 +27,33 @@ EditorBuildSettings:
     path: Assets/_GAMEASSETS/01-Scenes/ControlSettings.unity
     guid: a6880bb7e666b83428a599712731f01b
   - enabled: 1
-    path: Assets/_GAMEASSETS/01-Scenes/Levels/World0/Level0-1.unity
+    path: Assets/_GAMEASSETS/01-Scenes/Levels/World1/Level-1.unity
     guid: e3bc280e3c74cb34890a6449d2d08498
   - enabled: 1
-    path: Assets/_GAMEASSETS/01-Scenes/Levels/World0/Level0-2.unity
+    path: Assets/_GAMEASSETS/01-Scenes/Levels/World1/Level-2.unity
     guid: 7d93bf3c68d87f94b9c2fb37c2eb78c1
   - enabled: 1
-    path: Assets/_GAMEASSETS/01-Scenes/Levels/World0/Level0-3.unity
+    path: Assets/_GAMEASSETS/01-Scenes/Levels/World1/Level-3.unity
     guid: e967b4a2b528dcc4e849729329caa440
   - enabled: 1
-    path: Assets/_GAMEASSETS/01-Scenes/Levels/World0/Level0-4.unity
+    path: Assets/_GAMEASSETS/01-Scenes/Levels/World1/Level-4.unity
     guid: 3b7402863da576e458ca636a24a979f9
   - enabled: 1
-    path: Assets/_GAMEASSETS/01-Scenes/Levels/World0/Level0-5.unity
+    path: Assets/_GAMEASSETS/01-Scenes/Levels/World1/Level-5.unity
     guid: fb2c61a63edadac4d811384193b6b83c
   - enabled: 1
-    path: Assets/_GAMEASSETS/01-Scenes/Levels/World0/Level0-6.unity
+    path: Assets/_GAMEASSETS/01-Scenes/Levels/World1/Level-6.unity
     guid: b71ebf2bab8b4814998fcd9cdf510bd8
   - enabled: 1
-    path: Assets/_GAMEASSETS/01-Scenes/Levels/World0/Level0-7.unity
+    path: Assets/_GAMEASSETS/01-Scenes/Levels/World1/Level-7.unity
     guid: 9547f4a6b7a0bdd48855c2b6804cc236
   - enabled: 1
-    path: Assets/_GAMEASSETS/01-Scenes/Levels/World0/Level0-8.unity
+    path: Assets/_GAMEASSETS/01-Scenes/Levels/World1/Level-8.unity
     guid: 4f779d03dc1dfe945b8230da9724d9e8
   - enabled: 1
-    path: Assets/_GAMEASSETS/01-Scenes/Levels/World0/Level0-9.unity
+    path: Assets/_GAMEASSETS/01-Scenes/Levels/World1/Level-9.unity
     guid: e9a151a41a0fefd49ac64c2aab3e1d01
   - enabled: 1
-    path: Assets/_GAMEASSETS/01-Scenes/Levels/World1/Level1-1.unity
+    path: Assets/_GAMEASSETS/01-Scenes/Levels/World2/Level11.unity
     guid: 6f85088b6bbdeb843ac8b6d239eefb72
   m_configObjects: {}

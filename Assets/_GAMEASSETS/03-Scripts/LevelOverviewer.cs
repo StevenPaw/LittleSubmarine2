@@ -11,16 +11,18 @@ namespace LittleSubmarine2
     public class LevelOverviewer : MonoBehaviour
     {
         [SerializeField] private GameObject[] worldPanels;
-        [SerializeField] private GameObject[] leftArrows;
-        [SerializeField] private GameObject[] rightArrows;
+        [SerializeField] private GameObject leftArrow;
+        [SerializeField] private GameObject rightArrow;
         [SerializeField] private int activeWorld = 0;
         [SerializeField] private TMP_Text moneyText;
         [SerializeField] private LevelObject[] levels;
+        [SerializeField] private GameObject[] levelParent;
+        [SerializeField] private GameObject levelButtonPrefab;
         private SaveManager saveManager;
 
         private void Start()
         {
-            saveManager = GameObject.FindGameObjectWithTag(GameTags.SAVEMANAGER).GetComponent<SaveManager>();
+            saveManager = SaveManager.Instance;
             moneyText.text = saveManager.GetCoins().ToString();
             int completedLevelCount = 0; //Exclude the Tutorial World
             foreach (bool levelCompleted in saveManager.GetData().levelCompleted)
@@ -31,6 +33,7 @@ namespace LittleSubmarine2
                 }
             }
             
+            PopulateList();
             UpdateWorldVisibility();
         }
 
@@ -54,6 +57,22 @@ namespace LittleSubmarine2
 
         private void UpdateWorldVisibility()
         {
+            if (activeWorld == 0)
+            {
+                leftArrow.SetActive(false);
+                rightArrow.SetActive(true);
+            }
+            else if (activeWorld == worldPanels.Length -1)
+            {
+                leftArrow.SetActive(true);
+                rightArrow.SetActive(false);
+            }
+            else
+            {
+                leftArrow.SetActive(true);
+                rightArrow.SetActive(true);
+            }
+            
             for (int i = 0; i < worldPanels.Length; i++)
             {
                 if (i != activeWorld)
@@ -64,15 +83,40 @@ namespace LittleSubmarine2
                 {
                     worldPanels[i].SetActive(true);
                 }
+            }
+        }
 
-                if (i == 0)
+        private void PopulateList()
+        {
+            List<List<LevelObject>> levelList = new List<List<LevelObject>>();
+            foreach (LevelObject lvlObj in levels)
+            {
+                if (levelList.Count < lvlObj.WorldID +1)
                 {
-                    leftArrows[i].SetActive(false);
+                    levelList.Add(new List<LevelObject>());
                 }
+                
+                
+                
+                Debug.Log("Levels loaded");
+            }
 
-                if (i == worldPanels.Length - 1)
+            foreach (LevelObject lvlObj in levels)
+            {
+                levelList[lvlObj.WorldID].Add(lvlObj);
+            }
+
+            foreach (List<LevelObject> lvlList in levelList)
+            {
+                lvlList.Sort();
+            }
+
+            for (int w = 0; w < levelList.Count; w++)
+            {
+                for (int l = 0; l < levelList[w].Count; l++)
                 {
-                    rightArrows[i].SetActive(false);
+                    LevelButtonManager spawnedLevelButton = Instantiate(levelButtonPrefab, levelParent[w].transform).GetComponent<LevelButtonManager>();
+                    spawnedLevelButton.LevelObj = levelList[w][l];
                 }
             }
         }

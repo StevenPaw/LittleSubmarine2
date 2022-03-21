@@ -12,13 +12,17 @@ namespace LittleSubmarine2
 
         private string saveFilePath; //The path where the saveFiles are stored
         private PlayerData playerData;
+        private static SaveManager instance;
+
+        public static SaveManager Instance => instance;
 
         private void Start()
         {
             if (GameObject.FindGameObjectWithTag(GameTags.SAVEMANAGER) == gameObject)
             {
                 DontDestroyOnLoad(gameObject);
-                Debug.Log("SaveManager loaded");
+                instance = this;
+                Debug.Log("SaveManager set!");
             }
             else
             {
