@@ -13,8 +13,6 @@ namespace LittleSubmarine2
         [SerializeField] private Animator mainMenuAnimator;
         [SerializeField] private Animator creditsAnimator;
         [SerializeField] private Animator optionsAnimator;
-        [SerializeField] private string levelOverviewScene;
-        [SerializeField] private string tutorialLevel;
 
         [SerializeField] private GameObject DeleteSavesPrompt;
 

@@ -10,19 +10,22 @@ public class ScreenSafeArea : MonoBehaviour
     private Vector2 minAnchor;
     private Vector2 maxAnchor;
 
-    private void Awake()
+    private void Update()
     {
-        rectTransform = GetComponent<RectTransform>();
-        safeArea = Screen.safeArea;
-        minAnchor = safeArea.position;
-        maxAnchor = minAnchor + safeArea.size;
+        if (safeArea.height != Screen.height)
+        {
+            rectTransform = GetComponent<RectTransform>();
+            safeArea = Screen.safeArea;
+            minAnchor = safeArea.position;
+            maxAnchor = minAnchor + safeArea.size;
 
-        minAnchor.x /= Screen.width;
-        minAnchor.y /= Screen.height;
-        maxAnchor.x /= Screen.width;
-        maxAnchor.y /= Screen.height;
+            minAnchor.x /= Screen.width;
+            minAnchor.y /= Screen.height;
+            maxAnchor.x /= Screen.width;
+            maxAnchor.y /= Screen.height;
 
-        rectTransform.anchorMin = minAnchor;
-        rectTransform.anchorMax = maxAnchor;
+            rectTransform.anchorMin = minAnchor;
+            rectTransform.anchorMax = maxAnchor;
+        }
     }
 }
