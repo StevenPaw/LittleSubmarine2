@@ -8,12 +8,16 @@ namespace LittleSubmarine2
     {
         [SerializeField] private List<SubmarinePart> bodyParts;
         [SerializeField] private List<SubmarinePart> periscopeParts;
+        private static PartManager instance;
+        
+        public static PartManager Instance => instance;
 
         private void Start()
         {
             if (GameObject.FindGameObjectWithTag(GameTags.PARTMANAGER) == this.gameObject)
             {
                 DontDestroyOnLoad(this.gameObject);
+                instance = this;
                 Debug.Log("PartManager loaded");
             }
             else

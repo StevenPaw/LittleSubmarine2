@@ -108,7 +108,7 @@ namespace LittleSubmarine2
         
         public void OnNextLevel()
         {
-            SceneManager.LoadScene("Level-" + (levelObj.ID + 1));
+            SceneManager.LoadScene("Level-" + (levelObj.ID + 1).ToString());
         }
 
         public void OnRetryLevel()

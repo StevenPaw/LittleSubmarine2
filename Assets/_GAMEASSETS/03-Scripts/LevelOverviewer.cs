@@ -133,5 +133,10 @@ namespace LittleSubmarine2
         {
             SceneManager.LoadScene(Scenes.DECOSHOP);
         }
+
+        public void BTN_BackToMenu()
+        {
+            SceneManager.LoadScene(Scenes.MAINMENU);
+        }
     }
 }

@@ -3,29 +3,11 @@
     "m_SelectedPackage": {
         "deviceId": "WCR7N19111009715",
         "name": "com.LunaSnailStudios.LittleSubmarine2",
-        "processId": 2604,
+        "processId": 11101,
         "exited": false
     },
     "m_SelectedPriority": 0,
     "m_KnownPackagesForSerialization": [
-        {
-            "deviceId": "WCR7N19111009715",
-            "name": "com.LunaSnailStudios.LittleSubmarine2",
-            "processId": 21181,
-            "exited": true
-        },
-        {
-            "deviceId": "WCR7N19111009715",
-            "name": "com.LunaSnailStudios.LittleSubmarine2",
-            "processId": 22393,
-            "exited": true
-        },
-        {
-            "deviceId": "WCR7N19111009715",
-            "name": "com.LunaSnailStudios.LittleSubmarine2",
-            "processId": 22876,
-            "exited": true
-        },
         {
             "deviceId": "WCR7N19111009715",
             "name": "com.LunaSnailStudios.LittleSubmarine2",
@@ -42,18 +24,60 @@
             "deviceId": "WCR7N19111009715",
             "name": "com.actionlauncher.playstore",
             "processId": 20950,
-            "exited": false
+            "exited": true
         },
         {
             "deviceId": "WCR7N19111009715",
             "name": "com.android.settings",
             "processId": 30347,
-            "exited": false
+            "exited": true
         },
         {
             "deviceId": "WCR7N19111009715",
             "name": "com.LunaSnailStudios.LittleSubmarine2",
             "processId": 2604,
+            "exited": true
+        },
+        {
+            "deviceId": "WCR7N19111009715",
+            "name": "org.telegram.messenger.web",
+            "processId": 14916,
+            "exited": false
+        },
+        {
+            "deviceId": "WCR7N19111009715",
+            "name": "com.LunaSnailStudios.LittleSubmarine2",
+            "processId": 6305,
+            "exited": false
+        },
+        {
+            "deviceId": "WCR7N19111009715",
+            "name": "com.LunaSnailStudios.LittleSubmarine2",
+            "processId": 7096,
+            "exited": false
+        },
+        {
+            "deviceId": "WCR7N19111009715",
+            "name": "com.LunaSnailStudios.LittleSubmarine2",
+            "processId": 7572,
+            "exited": false
+        },
+        {
+            "deviceId": "WCR7N19111009715",
+            "name": "com.LunaSnailStudios.LittleSubmarine2",
+            "processId": 8399,
+            "exited": false
+        },
+        {
+            "deviceId": "WCR7N19111009715",
+            "name": "com.LunaSnailStudios.LittleSubmarine2",
+            "processId": 10395,
+            "exited": false
+        },
+        {
+            "deviceId": "WCR7N19111009715",
+            "name": "com.LunaSnailStudios.LittleSubmarine2",
+            "processId": 11101,
             "exited": false
         }
     ],

@@ -25,8 +25,8 @@ namespace LittleSubmarine2
 
         private void Start()
         {
-            saveManager = GameObject.FindGameObjectWithTag(GameTags.SAVEMANAGER).GetComponent<SaveManager>();
-            partManager = GameObject.FindGameObjectWithTag(GameTags.PARTMANAGER).GetComponent<PartManager>();
+            saveManager = SaveManager.Instance;
+            partManager = PartManager.Instance;
             
             submarineBody.sprite = partManager.GetBodyByID(saveManager.GetData().selectedBody).SpriteImage;
             submarinePeriscope.sprite = partManager.GetPeriscopeByID(saveManager.GetData().selectedPeriscope).SpriteImage;
