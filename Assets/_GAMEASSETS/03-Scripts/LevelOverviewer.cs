@@ -88,6 +88,7 @@ namespace LittleSubmarine2
 
         private void PopulateList()
         {
+            int lastAccessibleWorld = 0;
             List<List<LevelObject>> levelList = new List<List<LevelObject>>();
             foreach (LevelObject lvlObj in levels)
             {
@@ -96,8 +97,16 @@ namespace LittleSubmarine2
                     levelList.Add(new List<LevelObject>());
                 }
                 
-                
-                
+                if (lvlObj.ID != 0)
+                {
+                    if (saveManager.GetData().levelCompleted[lvlObj.ID - 1])
+                    {
+                        if (lvlObj.WorldID > lastAccessibleWorld)
+                        {
+                            lastAccessibleWorld = lvlObj.WorldID;
+                        }
+                    }
+                }
                 Debug.Log("Levels loaded");
             }
 
@@ -119,6 +128,8 @@ namespace LittleSubmarine2
                     spawnedLevelButton.LevelObj = levelList[w][l];
                 }
             }
+
+            activeWorld = lastAccessibleWorld;
         }
 
         public void StartLevel(int levelToLoad)

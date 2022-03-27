@@ -250,23 +250,18 @@ namespace LittleSubmarine2
 
         public void OnSwipeDetected (Swipe direction, Vector2 swipeVelocity)
         {
-            
             switch (direction)
             {
                 case Swipe.Down:
-                    Debug.Log("Swipe down detected!");
                     Move(Vector2.down, true); 
                     break;
                 case Swipe.Up:
-                    Debug.Log("Swipe up detected!");
                     Move(Vector2.up,true); 
                     break;
                 case Swipe.Left:
-                    Debug.Log("Swipe left detected!");
                     Move(Vector2.left, true); 
                     break;
                 case Swipe.Right:
-                    Debug.Log("Swipe right detected!");
                     Move(Vector2.right, true); 
                     break;
             }

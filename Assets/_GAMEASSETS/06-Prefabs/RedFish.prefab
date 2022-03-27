@@ -96,7 +96,6 @@ GameObject:
   - component: {fileID: 9105687628170417592}
   - component: {fileID: 82491797631615510}
   - component: {fileID: 1717258330349018176}
-  - component: {fileID: 5360925421864860864}
   m_Layer: 7
   m_Name: RedFish
   m_TagString: Untagged
@@ -133,15 +132,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movePoint: {fileID: 9105687628651517243}
-  WhatStopsMovement:
-    serializedVersion: 2
-    m_Bits: 72
   moveSpeed: 5
-  specialTiles:
-    serializedVersion: 2
-    m_Bits: 128
   blockType: 2
-  anim: {fileID: 5360925421864860864}
+  anim: {fileID: 0}
   history: {fileID: 9105687628170417592}
   selfCollider: {fileID: 9105687628170417574}
 --- !u!61 &9105687628170417574
@@ -216,25 +209,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tileType: 1
---- !u!95 &5360925421864860864
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9105687628170417571}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &9105687628651517242
 GameObject:
   m_ObjectHideFlags: 0
