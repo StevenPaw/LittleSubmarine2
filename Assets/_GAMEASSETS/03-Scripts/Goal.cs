@@ -22,14 +22,7 @@ namespace LittleSubmarine2
         [SerializeField] private LevelObject levelObj;
 
         [Header("Stars")] 
-        [SerializeField] private Image[] starImage;
-        [SerializeField] private Sprite starSpriteFilled;
-        [SerializeField] private Sprite starSpriteEmpty;
-        
-        [Header("Clock")]
-        [SerializeField] private Image clockImage;
-        [SerializeField] private Sprite clockSpriteFilled;
-        [SerializeField] private Sprite clockSpriteEmpty;
+        [SerializeField] private Image[] goalsImage;
 
         private bool earnedClock;
         private bool earnedMaxMoves;
@@ -57,7 +50,8 @@ namespace LittleSubmarine2
                 movesText.text = (playerController.UsedMoves) + " Moves";
                 usedTime = DateTime.Now - playerController.StartTime;
                 usedMoves = playerController.UsedMoves;
-                
+                goalsImage[0].DOFade(1f, 1f).SetDelay(0.5f);
+
                 if (usedTime.Hours > 0)
                 {
                     timeText.text = "Time: " + usedTime.ToString(@"hh\:mm\:ss");
@@ -70,13 +64,13 @@ namespace LittleSubmarine2
                 if (usedMoves <= levelObj.MaxMovesForStar)
                 {
                     Debug.Log("UsedMoves: " + usedMoves + " for max (2): " + levelObj.MaxMovesForStar);
-                    starImage[1].DOCrossfadeImage(starSpriteFilled, 1.0f);
+                    goalsImage[1].DOFade(1f, 1f).SetDelay(1f);
                     earnedMaxMoves = true;
                 }
 
                 if (usedTime.TotalSeconds < levelObj.MaxSecondsForClock)
                 {
-                    clockImage.DOCrossfadeImage(clockSpriteFilled, 2.0f);
+                    goalsImage[2].DOFade(1f, 1f).SetDelay(1.5f);
                     earnedClock = true;
                     newCoins += coinsPerStar;
                 }
@@ -85,7 +79,7 @@ namespace LittleSubmarine2
                 bool newEarnedMaxMoves = saveManager.GetData().maxMovesCompleted[levelObj.ID] != true && earnedMaxMoves;
                 bool newEarnedClock = saveManager.GetData().clockCompleted[levelObj.ID] != true && earnedClock;
 
-                if (!newEarnedCompleted && !newEarnedClock)
+                if (!newEarnedCompleted && !newEarnedClock && !newEarnedMaxMoves)
                 {
                     addedCoinsGO.SetActive(false);
                 }

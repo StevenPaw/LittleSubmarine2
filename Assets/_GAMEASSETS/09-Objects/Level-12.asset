@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 12
   worldID: 2
-  maxMovesForStar: 10
+  maxMovesForStar: 60
   maxSecondsForClock: 120
   scene: Level-10
   isBossLevel: 1
