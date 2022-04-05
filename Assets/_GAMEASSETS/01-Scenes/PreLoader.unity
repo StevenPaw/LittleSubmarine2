@@ -737,6 +737,7 @@ GameObject:
   - component: {fileID: 1861717627}
   - component: {fileID: 1861717626}
   - component: {fileID: 1861717625}
+  - component: {fileID: 1861717628}
   m_Layer: 0
   m_Name: InputManager
   m_TagString: Untagged
@@ -782,7 +783,19 @@ MonoBehaviour:
       m_Calls: []
   m_ActionEvents:
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1861717628}
+        m_TargetAssemblyTypeName: LittleSubmarine2.PlayerInputManager, Assembly-CSharp
+        m_MethodName: BTN_Move
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: d25284a7-5bfa-479d-8a35-1641cfd5039e
     m_ActionName: Ingame/Move[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d,/Keyboard/upArrow,/Keyboard/downArrow,/Keyboard/leftArrow,/Keyboard/rightArrow]
   - m_PersistentCalls:
@@ -840,6 +853,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1861717628
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1861717624}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1492a605977f43e5851d144ece328d9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canMove: 1
 --- !u!1 &1917984236
 GameObject:
   m_ObjectHideFlags: 0

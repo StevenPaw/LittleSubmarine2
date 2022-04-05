@@ -229,7 +229,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minSwipeLength: 0.5
   triggerSwipeAtMinLength: 0
-  useEightDirections: 0
 --- !u!114 &423823152705686101
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -245,17 +244,10 @@ MonoBehaviour:
   moveSpeed: 5
   arrowButtons: {fileID: 6345775053246682724}
   movePoint: {fileID: 1983066708401229109}
-  whatStopsMovement:
-    serializedVersion: 2
-    m_Bits: 8
-  specialTiles:
-    serializedVersion: 2
-    m_Bits: 128
   playerSpriteGO: {fileID: 7193182937873070951}
   playerBodySprite: {fileID: 80538310766674129}
   playerPeriscopeSprite: {fileID: 8481600981513008025}
   selfCollider: {fileID: 0}
-  canMove: 1
   moveCounterText: {fileID: 6674632642975876155}
   usedMoves: 0
 --- !u!114 &1422281136760795709
@@ -455,8 +447,8 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 423823152705686101}
-          m_TargetAssemblyTypeName: LittleSubmarine2.PlayerController, Assembly-CSharp
+        - m_Target: {fileID: 2916008432159051618}
+          m_TargetAssemblyTypeName: LittleSubmarine2.PlayerOnScreenController, Assembly-CSharp
           m_MethodName: BTN_DirectionUpHold
           m_Mode: 1
           m_Arguments:
@@ -471,8 +463,8 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 423823152705686101}
-          m_TargetAssemblyTypeName: LittleSubmarine2.PlayerController, Assembly-CSharp
+        - m_Target: {fileID: 2916008432159051618}
+          m_TargetAssemblyTypeName: LittleSubmarine2.PlayerOnScreenController, Assembly-CSharp
           m_MethodName: BTN_DirectionRelease
           m_Mode: 1
           m_Arguments:
@@ -835,8 +827,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 423823152705686101}
-        m_TargetAssemblyTypeName: LittleSubmarine2.PlayerController, Assembly-CSharp
+      - m_Target: {fileID: 2916008432159051618}
+        m_TargetAssemblyTypeName: LittleSubmarine2.PlayerOnScreenController, Assembly-CSharp
         m_MethodName: BTN_BackToMenu
         m_Mode: 1
         m_Arguments:
@@ -1119,8 +1111,8 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 423823152705686101}
-          m_TargetAssemblyTypeName: LittleSubmarine2.PlayerController, Assembly-CSharp
+        - m_Target: {fileID: 2916008432159051618}
+          m_TargetAssemblyTypeName: LittleSubmarine2.PlayerOnScreenController, Assembly-CSharp
           m_MethodName: BTN_DirectionLeftHold
           m_Mode: 1
           m_Arguments:
@@ -1135,8 +1127,8 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 423823152705686101}
-          m_TargetAssemblyTypeName: LittleSubmarine2.PlayerController, Assembly-CSharp
+        - m_Target: {fileID: 2916008432159051618}
+          m_TargetAssemblyTypeName: LittleSubmarine2.PlayerOnScreenController, Assembly-CSharp
           m_MethodName: BTN_DirectionRelease
           m_Mode: 1
           m_Arguments:
@@ -1285,8 +1277,8 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 423823152705686101}
-          m_TargetAssemblyTypeName: LittleSubmarine2.PlayerController, Assembly-CSharp
+        - m_Target: {fileID: 2916008432159051618}
+          m_TargetAssemblyTypeName: LittleSubmarine2.PlayerOnScreenController, Assembly-CSharp
           m_MethodName: BTN_DirectionDownHold
           m_Mode: 1
           m_Arguments:
@@ -1301,8 +1293,8 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 423823152705686101}
-          m_TargetAssemblyTypeName: LittleSubmarine2.PlayerController, Assembly-CSharp
+        - m_Target: {fileID: 2916008432159051618}
+          m_TargetAssemblyTypeName: LittleSubmarine2.PlayerOnScreenController, Assembly-CSharp
           m_MethodName: BTN_DirectionRelease
           m_Mode: 1
           m_Arguments:
@@ -1451,8 +1443,8 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 423823152705686101}
-          m_TargetAssemblyTypeName: LittleSubmarine2.PlayerController, Assembly-CSharp
+        - m_Target: {fileID: 2916008432159051618}
+          m_TargetAssemblyTypeName: LittleSubmarine2.PlayerOnScreenController, Assembly-CSharp
           m_MethodName: BTN_DirectionRightHold
           m_Mode: 1
           m_Arguments:
@@ -1467,8 +1459,8 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 423823152705686101}
-          m_TargetAssemblyTypeName: LittleSubmarine2.PlayerController, Assembly-CSharp
+        - m_Target: {fileID: 2916008432159051618}
+          m_TargetAssemblyTypeName: LittleSubmarine2.PlayerOnScreenController, Assembly-CSharp
           m_MethodName: BTN_DirectionRelease
           m_Mode: 1
           m_Arguments:
@@ -1624,8 +1616,9 @@ GameObject:
   - component: {fileID: 6328544593452752591}
   - component: {fileID: 5256653296667620318}
   - component: {fileID: 5500029053354976811}
+  - component: {fileID: 2916008432159051618}
   m_Layer: 5
-  m_Name: SteeringWheelLeft
+  m_Name: SteeringWheel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1694,6 +1687,18 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &2916008432159051618
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6345775053246682724}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 637f4fe3c176f7a44a4705127db2f5f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7138578583067790865
 GameObject:
   m_ObjectHideFlags: 0

@@ -20,11 +20,7 @@ public enum Swipe
     Up,
     Down,
     Left,
-    Right,
-    UpLeft,
-    UpRight,
-    DownLeft,
-    DownRight
+    Right
 };
  
 public class SwipeManager : MonoBehaviour
@@ -37,8 +33,7 @@ public class SwipeManager : MonoBehaviour
     [Tooltip("If true, a swipe is counted when the min swipe length is reached. If false, a swipe is counted when the touch/click ends.")]
     [SerializeField] bool triggerSwipeAtMinLength = false;
  
-    [Tooltip("Whether to detect eight or four cardinal directions")]
-    [SerializeField] bool useEightDirections = false;
+    bool useEightDirections = false;
  
     #endregion
  
@@ -52,11 +47,7 @@ public class SwipeManager : MonoBehaviour
         { Swipe.Up,         CardinalDirection.Up                 },
         { Swipe.Down,         CardinalDirection.Down             },
         { Swipe.Right,         CardinalDirection.Right             },
-        { Swipe.Left,         CardinalDirection.Left             },
-        { Swipe.UpRight,     CardinalDirection.UpRight             },
-        { Swipe.UpLeft,     CardinalDirection.UpLeft             },
-        { Swipe.DownRight,     CardinalDirection.DownRight         },
-        { Swipe.DownLeft,     CardinalDirection.DownLeft         }
+        { Swipe.Left,         CardinalDirection.Left             }
     };
  
     public delegate void OnSwipeDetectedHandler(Swipe swipeDirection, Vector2 swipeVelocity);
@@ -147,10 +138,6 @@ public class SwipeManager : MonoBehaviour
     public static bool IsSwipingLeft         () {     return IsSwipingDirection(Swipe.Left);    	}
     public static bool IsSwipingUp           () {     return IsSwipingDirection(Swipe.Up);          }
     public static bool IsSwipingDown         () {     return IsSwipingDirection(Swipe.Down);        }
-    public static bool IsSwipingDownLeft     () {     return IsSwipingDirection(Swipe.DownLeft);    }
-    public static bool IsSwipingDownRight    () {     return IsSwipingDirection(Swipe.DownRight);   }
-    public static bool IsSwipingUpLeft       () {     return IsSwipingDirection(Swipe.UpLeft);      }
-    public static bool IsSwipingUpRight      () {     return IsSwipingDirection(Swipe.UpRight);     }
  
     #region Helper Functions
  

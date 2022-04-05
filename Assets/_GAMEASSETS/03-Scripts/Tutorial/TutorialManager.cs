@@ -18,11 +18,13 @@ public class TutorialManager : MonoBehaviour
 
     [SerializeField] private int tutorialStep;
     [SerializeField] private PlayerController playerController;
+    private PlayerInputManager playerInputManager;
     private SettingsManager settings;
 
     private void Start()
     {
-        playerController.SetCanMove(false);
+        playerInputManager = PlayerInputManager.Instance;
+        playerInputManager.CanMove = false;
         settings = GameObject.FindGameObjectWithTag(GameTags.SETTINGSMANAGER).GetComponent<SettingsManager>();
         
         controlSelectBox.SetActive(true);
@@ -51,7 +53,7 @@ public class TutorialManager : MonoBehaviour
                 controlSelectBackground.SetActive(false);
                 tutorialBox.SetActive(true);
                 playerController.UpdateArrowButtons();
-                playerController.SetCanMove(true);
+                playerInputManager.CanMove = true;
                 //Move Tutorial
                 if (settings.ShowSteeringWheel)
                 {
